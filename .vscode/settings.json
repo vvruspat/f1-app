@@ -1,3 +1,16 @@
 {
-	"workbench.tree.indent": 20
+	"workbench.tree.indent": 20,
+	"biome.requireConfigFile": true,
+	"biome.projects": [
+		{
+			"folder": "backend",
+			"root": "apps/backend",
+			"configPath": "apps/backend/biome.json"
+		},
+		{
+			"folder": "frontend",
+			"root": "apps/frontend",
+			"configPath": "apps/frontend/biome.json"
+		}
+	]
 }
