@@ -9,5 +9,12 @@
 			".next/**/*",
 			".build/**/*"
 		]
+	},
+	"linter": {
+		"rules": {
+			"style": {
+				"useImportType": "off"
+			}
+		}
 	}
 }
