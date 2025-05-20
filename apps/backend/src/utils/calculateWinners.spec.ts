@@ -1,8 +1,7 @@
 import { calculateWinner } from "./calculateWinners";
-import results from "./raceWinners.test-data.json";
-import winnerResult from "./winnerResult.test-data.json";
-import racesWinnersResult from "./racesWinnersResult.test-data.json";
-import type { Race } from "@repo/types";
+import results from "./raceWinners.test-data";
+import winnerResult from "./winnerResult.test-data";
+import racesWinnersResult from "./racesWinnersResult.test-data";
 
 test("unit calculateWinner", () => {
 	const { globalWinner, racesWinners } = calculateWinner(results);
