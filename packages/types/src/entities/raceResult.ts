@@ -1,12 +1,12 @@
 import type { Constructor } from "./constructor";
 import type { Driver } from "./driver";
-import type { FastestLap } from "./FastestLap";
+import type { FastestLap } from "./fastestLap";
 import type { Time } from "./time";
 
-export type RaceResult = {
+export interface RaceResult {
 	number: string;
 	position: string;
-	positionText: number;
+	positionText: string;
 	points: number;
 	Driver: Driver;
 	Constructor: Constructor;
@@ -14,5 +14,5 @@ export type RaceResult = {
 	laps: number;
 	status: string;
 	Time?: Time;
-	FastestLap: FastestLap;
-};
+	FastestLap?: FastestLap;
+}

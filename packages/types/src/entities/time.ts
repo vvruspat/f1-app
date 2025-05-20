@@ -1,4 +1,4 @@
-export type Time = {
-  millis?: string;
-  time: string;
-};
+export interface Time {
+	millis?: string;
+	time: string;
+}

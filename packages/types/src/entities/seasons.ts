@@ -1,20 +1,20 @@
 import type { Race } from "./race";
-import type { Response } from "./response";
+import type { ErgastResponse } from "./ergastResponse";
 
-export type Season = {
-	season: string;
-	url: string;
-};
+export interface Season {
+  season: string;
+  url: string;
+}
 
-export type SeasonsResponse = Response<{
-	SeasonTable: {
-		Seasons: Season[];
-	};
-}>;
+export interface SeasonsErgastResponse extends ErgastResponse<{
+  SeasonTable: {
+    Seasons: Season[];
+  };
+}> {}
 
-export type SeasonResultsResponse = Response<{
-	RaceTable: {
-		season: number;
-		Races: Race[];
-	};
-}>;
+export interface SeasonResultsErgastResponse extends ErgastResponse<{
+  RaceTable: {
+    season: number;
+    Races: Race[];
+  };
+}> {}

@@ -1,6 +1,6 @@
-export type Constructor = {
-  constructorId: string;
-  url: string;
-  name: string;
-  nationality: string;
-};
+export interface Constructor {
+	constructorId: string;
+	url: string;
+	name: string;
+	nationality: string;
+}

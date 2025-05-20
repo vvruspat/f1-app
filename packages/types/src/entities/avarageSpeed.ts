@@ -1,4 +1,4 @@
-export type AverageSpeed = {
-  units: string;
-  speed: string;
-};
+export interface AverageSpeed {
+	units: string;
+	speed: string;
+}
