@@ -1,27 +1,24 @@
 import { Module } from "@nestjs/common";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { User } from "./db";
 import { ScheduleModule } from "@nestjs/schedule";
 import { SeasonsModule } from "./seasons/seasons.module";
 import { TasksModule } from "./tasks/tasks.module";
+import { MongooseModule } from "@nestjs/mongoose";
+import { ConfigModule, ConfigService } from "@nestjs/config";
 
 @Module({
 	imports: [
-		// TypeOrmModule.forRootAsync({
-		// 	useFactory: () => ({
-		// 		type: "postgres",
-		// 		host: process.env.DB_HOST,
-		// 		port: +(process.env.DB_PORT ?? 0),
-		// 		username: process.env.DB_USER,
-		// 		password: process.env.DB_PASS,
-		// 		database: process.env.DB_NAME,
-		// 		entities: [User],
-		// 		synchronize: false,
-		// 	}),
-		// }),
-		// TypeOrmModule.forFeature([User]),
+		ConfigModule.forRoot({
+			isGlobal: true,
+		}),
+		MongooseModule.forRootAsync({
+			imports: [ConfigModule],
+			inject: [ConfigService],
+			useFactory: (configService: ConfigService) => ({
+				uri: configService.get<string>("MONGODB_URI"),
+			}),
+		}),
 		ScheduleModule.forRoot(),
 		TasksModule,
 		SeasonsModule,

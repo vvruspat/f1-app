@@ -3,16 +3,18 @@ import results from "./raceWinners.test-data";
 import winnerResult from "./winnerResult.test-data";
 import racesWinnersResult from "./racesWinnersResult.test-data";
 
-test("unit calculateWinner", () => {
-	const { globalWinner, racesWinners } = calculateWinner(results);
+describe("utils: calculate winner", () => {
+	it("unit calculateWinner", () => {
+		const { globalWinner, racesWinners } = calculateWinner(results);
 
-	expect(globalWinner).toMatchObject(winnerResult);
-	expect(racesWinners).toMatchObject(racesWinnersResult);
-});
+		expect(globalWinner).toMatchObject(winnerResult);
+		expect(racesWinners).toMatchObject(racesWinnersResult);
+	});
 
-test("unit calculateWinner empty", () => {
-	const { globalWinner, racesWinners } = calculateWinner([]);
+	it("unit calculateWinner empty", () => {
+		const { globalWinner, racesWinners } = calculateWinner([]);
 
-	expect(globalWinner).toMatchObject({});
-	expect(racesWinners).toMatchObject([]);
+		expect(globalWinner).toMatchObject({});
+		expect(racesWinners).toMatchObject([]);
+	});
 });

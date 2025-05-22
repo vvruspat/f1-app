@@ -2,23 +2,57 @@ import { Test, type TestingModule } from "@nestjs/testing";
 import { SeasonResultsController } from "./results.controller";
 import { SeasonResultsService } from "./results.service";
 
+import winnerResult from "../../utils/winnerResult.test-data";
+import racesWinnersResult from "../../utils//racesWinnersResult.test-data";
+import raceWinners from "../../utils/raceWinners.test-data";
+
 describe("SeasonResultsController", () => {
 	let seasonResultsController: SeasonResultsController;
+	let seasonResultsService: SeasonResultsService;
 
 	beforeEach(async () => {
-		const seasonresults: TestingModule = await Test.createTestingModule({
+		const mockSeasonResultsService = {
+			getSeasonResults: jest.fn(),
+		};
+
+		const module: TestingModule = await Test.createTestingModule({
 			controllers: [SeasonResultsController],
-			providers: [SeasonResultsService],
+			providers: [
+				{ provide: SeasonResultsService, useValue: mockSeasonResultsService },
+			],
 		}).compile();
 
-		seasonResultsController = seasonresults.get<SeasonResultsController>(
+		seasonResultsController = module.get<SeasonResultsController>(
 			SeasonResultsController,
 		);
+		seasonResultsService =
+			module.get<SeasonResultsService>(SeasonResultsService);
 	});
 
-	describe("root", () => {
-		it('should return "Hello World!"', () => {
-			expect(seasonResultsController.getHello()).toBe("Hello World!");
+	it("should be defined", () => {
+		expect(seasonResultsController).toBeDefined();
+	});
+
+	describe("getSeasonResults", () => {
+		it("should return season results with winner info", async () => {
+			const season = "2023";
+			const mockResult = {
+				season: "2022",
+				Races: raceWinners,
+				Winner: {
+					globalWinner: winnerResult,
+					racesWinners: racesWinnersResult,
+				},
+			};
+			jest
+				.spyOn(seasonResultsService, "getSeasonResults")
+				.mockResolvedValue(mockResult);
+
+			const result = await seasonResultsController.getSeasonResults(season);
+			expect(result).toBe(mockResult);
+			expect(seasonResultsService.getSeasonResults).toHaveBeenCalledWith(
+				season,
+			);
 		});
 	});
 });
