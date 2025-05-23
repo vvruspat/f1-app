@@ -5,6 +5,7 @@ import { SeasonResultsService } from "./results.service";
 import winnerResult from "../../utils/winnerResult.test-data";
 import racesWinnersResult from "../../utils//racesWinnersResult.test-data";
 import raceWinners from "../../utils/raceWinners.test-data";
+import { CACHE_MANAGER } from "@nestjs/cache-manager";
 
 describe("SeasonResultsController", () => {
 	let seasonResultsController: SeasonResultsController;
@@ -19,6 +20,7 @@ describe("SeasonResultsController", () => {
 			controllers: [SeasonResultsController],
 			providers: [
 				{ provide: SeasonResultsService, useValue: mockSeasonResultsService },
+				{ provide: CACHE_MANAGER, useValue: {} },
 			],
 		}).compile();
 

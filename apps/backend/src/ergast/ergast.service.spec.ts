@@ -5,6 +5,7 @@ import { ErgastService } from "./ergast.service";
 import { SeasonModel } from "../db/schemas/season.schema";
 import { SeasonResultsModel } from "../db/schemas/results.schema";
 import type { Race } from "@repo/types";
+import { CACHE_MANAGER } from "@nestjs/cache-manager";
 
 const races: Race[] = [
 	{
@@ -100,6 +101,7 @@ describe("ErgastService", () => {
 					useValue: resultsModel,
 				},
 				{ provide: ConfigService, useValue: configService },
+				{ provide: CACHE_MANAGER, useValue: {} },
 			],
 		}).compile();
 
