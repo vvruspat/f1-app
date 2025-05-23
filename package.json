@@ -7,6 +7,7 @@
 		"lint": "turbo run lint",
 		"format": "turbo run format",
 		"test": "turbo run test",
+		"test:e2e": "turbo run test:e2e",
 		"ci": "turbo run lint build",
 		"check-types": "turbo run check-types",
 		"prepare": "husky"
@@ -21,10 +22,7 @@
 		"node": ">=18"
 	},
 	"packageManager": "npm@10.9.2",
-	"workspaces": [
-		"apps/*",
-		"packages/*"
-	],
+	"workspaces": ["apps/*", "packages/*"],
 	"dependencies": {
 		"@nestjs/schedule": "^6.0.0"
 	}

@@ -24,8 +24,8 @@ export class ErgastService implements OnApplicationBootstrap {
 		this.apiBase = this.configService.get<string>("ERGAST_API_BASE") ?? "";
 	}
 
-	onApplicationBootstrap() {
-		this.syncSeasons();
+	async onApplicationBootstrap() {
+		await this.syncSeasons();
 	}
 
 	fetchSeasonResults(season: string, limit = 100) {
