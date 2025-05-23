@@ -13,3 +13,4 @@ export * from "./raceResult";
 export * from "./seasons";
 export * from "./time";
 export * from "./winner";
+export * from "./f1SeasonResults";

@@ -4,7 +4,7 @@ import type { HydratedDocument } from "mongoose";
 
 @Schema()
 export class SeasonModel implements Season {
-	@Prop({ required: true })
+	@Prop({ required: true, unique: true, index: true })
 	season: string;
 
 	@Prop()

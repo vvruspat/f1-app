@@ -1,12 +1,11 @@
 import { Module } from "@nestjs/common";
-import { TasksService } from "./tasks.service";
 import { ErgastService } from "./ergast.service";
 import { MongooseModule } from "@nestjs/mongoose";
-import { SeasonModel, SeasonSchema } from "../db/schemas/season.schema";
 import {
 	SeasonResultsModel,
 	SeasonResultsSchema,
 } from "../db/schemas/results.schema";
+import { SeasonModel, SeasonSchema } from "../db/schemas/season.schema";
 
 @Module({
 	imports: [
@@ -16,6 +15,6 @@ import {
 		]),
 	],
 	controllers: [],
-	providers: [TasksService, ErgastService],
+	providers: [ErgastService],
 })
-export class TasksModule {}
+export class ErgastModule {}
