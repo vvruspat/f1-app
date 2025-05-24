@@ -19,6 +19,7 @@ services:
       - "3000:3000"   # frontend
       - "3001:3001"   # docs
       - "3002:3002"   # backend
+      - "6006:6006"   # storybook
     environment:
       - NODE_ENV=development
     command: npm run docker:startup

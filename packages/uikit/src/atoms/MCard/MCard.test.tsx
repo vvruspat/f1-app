@@ -1,0 +1,18 @@
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import MCard from './MCard';
+import React from 'react';
+
+describe('MCard', () => {
+  test('render card', async () => {
+    render(
+      <MCard footer="Footer" header="Header">
+        Content
+      </MCard>
+    );
+
+    expect(screen.getByText('Content')).toBeInTheDocument();
+    expect(screen.getByText('Footer')).toBeInTheDocument();
+    expect(screen.getByText('Header')).toBeInTheDocument();
+  });
+});

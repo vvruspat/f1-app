@@ -11,6 +11,7 @@
 		"ci": "turbo run lint build",
 		"check-types": "turbo run check-types",
 		"docker:startup": "npm install && npm run dev",
+		"docker:build": "docker-compose -f docker-compose.dev.yml build",
 		"docker:dev": "docker-compose -f docker-compose.dev.yml up",
 		"prepare": "husky"
 	},
