@@ -19,8 +19,8 @@
 		"test:e2e": {
 			"dependsOn": ["^test:e2e"]
 		},
-		"check-types": {
-			"dependsOn": ["^check-types"]
+		"csstypes": {
+			"dependsOn": ["^csstypes"]
 		},
 		"dev": {
 			"cache": false,

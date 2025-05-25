@@ -1,0 +1,18 @@
+.MScrollGallery {
+	width: 100%;
+
+	overflow-x: scroll;
+	scroll-snap-type: x mandatory;
+	scrollbar-width: none;
+	scroll-behavior: smooth;
+
+	box-sizing: border-box;
+}
+
+.MScrollGallery::-webkit-scrollbar {
+	display: none;
+}
+
+.MScrollGalleryItem {
+	scroll-snap-align: center;
+}

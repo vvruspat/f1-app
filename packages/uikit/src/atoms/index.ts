@@ -1,4 +1,7 @@
 export { MRadio } from "./MRadio";
+export { MBadge } from "./MBadge";
+export { MGallery } from "./MGallery";
+export { MScrollGallery } from "./MScrollGallery";
 export { MHeading } from "./MHeading";
 export { MInput } from "./MInput";
 export { MLabel } from "./MLabel";
@@ -27,4 +30,5 @@ export { MAvatar } from "./MAvatar";
 export { MAlert } from "./MAlert";
 export { MSpinner } from "./MSpinner";
 export { MDescriptionList } from "./MDescriptionList";
+export { MFlag } from "./MFlag";
 export * from "./MIcon";

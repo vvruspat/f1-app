@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders flag by country 1`] = `
+<div
+  class="flag flag_s fi fi-nl"
+  data-testid="flag"
+/>
+`;
+
+exports[`renders flag by nationality 1`] = `
+<div
+  class="flag flag_s fi fi-nl"
+  data-testid="flag"
+/>
+`;
