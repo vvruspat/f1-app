@@ -80,7 +80,9 @@
 		"vite-plugin-svgr": "^4.3.0",
 		"vitest": "^3.0.9"
 	},
-	"workspaces": ["src/*"],
+	"workspaces": [
+		"src/*"
+	],
 	"lint-staged": {
 		"src/**/*": "biome format --write"
 	},

@@ -5,21 +5,21 @@ import type { Country, Nationality } from "./types";
 
 export const useCountry = () => {
 	const getCountryByName = useCallback((name: Country) => {
-		return countries.find((country) => country.name === name);
+		return countries.data
+			.find((country) => country.name.toLowerCase() === name.toLowerCase())
+			?.code.toLowerCase();
 	}, []);
 
-	const getCountryByNationality = useCallback(
-		(name: Nationality) => {
-			const nationalityCountry = nationalities.find(
-				(nationality) => nationality.Nationality === name,
-			);
+	const getCountryByNationality = useCallback((name: Nationality) => {
+		const nationalityCountry = nationalities.data.find(
+			(nationality) =>
+				nationality.Nationality.toLowerCase() === name.toLowerCase(),
+		);
 
-			if (nationalityCountry) {
-				return getCountryByName(nationalityCountry.Country);
-			}
-		},
-		[getCountryByName],
-	);
+		if (nationalityCountry) {
+			return nationalityCountry.Code.toLowerCase();
+		}
+	}, []);
 
 	return {
 		getCountryByName,

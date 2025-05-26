@@ -1,24 +1,20 @@
 .flag {
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-color: var(--background-dark-color);
+	background-color: var(--background-tertiary);
+	border-radius: 50%;
+	overflow: hidden;
 }
 
 .flag_s {
-    border-radius: 12px;
-    height: 24px;
-    width: 24px;
+	height: 24px;
+	width: 24px;
 }
 
 .flag_m {
-    border-radius: 20px;
-    height: 40px;
-    width: 40px;
+	height: 40px;
+	width: 40px;
 }
 
 .flag_l {
-    border-radius: 24px;
-    height: 48px;
-    width: 48px;
+	height: 48px;
+	width: 48px;
 }

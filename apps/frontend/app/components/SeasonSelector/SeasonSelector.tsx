@@ -1,5 +1,5 @@
 import type { Season } from "@repo/types";
-import { MGallery, MLinkButton, MScrollGallery } from "@repo/uikit";
+import { MLinkButton, MScrollGallery } from "@repo/uikit";
 
 type SeasonSelectorProps = {
 	seasons: Season[];

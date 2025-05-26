@@ -1,12 +1,6 @@
 /* eslint-disable */
 export default {
 	preset: "ts-jest/presets/default-esm",
-	globals: {
-		"ts-jest": {
-			useESM: true,
-			tsconfig: "<rootDir>/tsconfig.spec.json",
-		},
-	},
 	displayName: "@repo/uikit",
 	coverageDirectory: "./coverage",
 	rootDir: ".",
@@ -15,11 +9,15 @@ export default {
 	transform: {
 		"^.+\\.(ts|tsx|js|html)$": [
 			"ts-jest",
-			{ tsconfig: "<rootDir>/tsconfig.spec.json" },
+			{
+				useESM: true,
+				tsconfig: "<rootDir>/tsconfig.spec.json",
+			},
 		],
 		"^.+\\.css$": "<rootDir>/__mocks__/cssTransform.cjs",
 		"^(?!.*\\.(js|jsx|css|scss|json)$)":
 			"<rootDir>/__mocks__/fileTransform.cjs",
+		"^.+\\.svg$": "jest-transformer-svg",
 	},
 	transformIgnorePatterns: [
 		"[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$",
@@ -28,6 +26,7 @@ export default {
 	moduleNameMapper: {
 		"^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
 		"\\.svg\\?react$": "<rootDir>/__mocks__/svgTransform.js",
+		"\\.(svg)$": "<rootDir>/__mocks__/svg.js",
 	},
 	testEnvironment: "jsdom",
 	/**

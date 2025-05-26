@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "@repo/uikit/styles/index.css";
+import { MainLayout } from "./components/MainLayout";
 
 export const metadata: Metadata = {
 	title: "Create Next App",
@@ -12,8 +13,13 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
-			<body>{children}</body>
+		<html
+			lang="en"
+			data-theme="light"
+			data-platform="desktop"
+			data-brand="f1-app"
+		>
+			<MainLayout>{children}</MainLayout>
 		</html>
 	);
 }

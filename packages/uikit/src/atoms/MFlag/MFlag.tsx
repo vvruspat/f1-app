@@ -1,35 +1,65 @@
-import { useMemo } from "react";
+"use client";
+
 import cn from "clsx";
 
-import "./flag-icons/css/flag-icons.css";
 import s from "./MFlag.module.css";
 import { useCountry } from "./useCountry";
 import type { Country, Nationality } from "./types";
+import {
+	type ReactNode,
+	type ComponentProps,
+	useEffect,
+	useState,
+} from "react";
 
-type MFlagProps = {
-	/** Flag */
+type MFlagProps = ComponentProps<"div"> & {
 	size?: "s" | "m" | "l";
-	/** Country name from API */
-	country?: Country;
-	/** Nationality name from API */
-	nationality?: Nationality;
-};
+} & (
+		| {
+				country?: Country;
+				nationality?: never;
+		  }
+		| {
+				country?: never;
+				nationality?: Nationality;
+		  }
+	);
 
 /**
  * Flag component
  */
-export const MFlag = ({ size = "s", country, nationality }: MFlagProps) => {
+export const MFlag = ({
+	size = "s",
+	country,
+	nationality,
+	...divProps
+}: MFlagProps) => {
+	const [flag, setFlag] = useState<ReactNode>(null);
 	const { getCountryByNationality, getCountryByName } = useCountry();
 
-	const code = useMemo(() => {
-		if (nationality) return getCountryByNationality(nationality)?.code;
-		if (country) return getCountryByName(country)?.code;
+	useEffect(() => {
+		(async () => {
+			let code: string | undefined = "";
+			if (nationality) code = getCountryByNationality(nationality);
+			else if (country) code = getCountryByName(country);
+
+			if (code) {
+				const icon = (await import(`./flag-icons/flags/${code}.svg`)).default;
+
+				setFlag(icon);
+			} else {
+				setFlag(null);
+			}
+		})();
 	}, [country, getCountryByName, getCountryByNationality, nationality]);
 
 	return (
 		<div
-			className={cn(s.flag, s[`flag_${size}`], "fi", `fi-${code}`)}
+			className={cn(s.flag, s[`flag_${size}`])}
 			data-testid="flag"
-		/>
+			{...divProps}
+		>
+			{flag}
+		</div>
 	);
 };

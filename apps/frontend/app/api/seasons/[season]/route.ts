@@ -1,11 +1,10 @@
 import { NextResponse } from "next/server";
 
-export async function GET(
-	_request: Request,
-	context: { params: { season: string } },
-) {
+type SeasonResultsContext = { params: Promise<{ season: string }> };
+
+export async function GET(_request: Request, context: SeasonResultsContext) {
 	const backendUrl = process.env.NEXT_API_URL;
-	const season = context.params.season;
+	const season = (await context.params).season;
 
 	try {
 		const res = await fetch(`${backendUrl}/seasons/${season}`);

@@ -9,6 +9,7 @@
 		"test": "turbo run test",
 		"test:e2e": "turbo run test:e2e",
 		"ci": "turbo run lint build",
+		"check-types": "turbo run check-types",
 		"csstypes": "turbo run csstypes",
 		"docker:startup": "npm install && npm run dev",
 		"docker:build": "docker-compose -f docker-compose.dev.yml build",
