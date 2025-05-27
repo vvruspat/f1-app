@@ -5,9 +5,5 @@ export default function SeasonResultPage({
 }: {
 	params: Promise<{ season: string }>;
 }) {
-	return (
-		<main>
-			<RoundCard />
-		</main>
-	);
+	return <RoundCard />;
 }

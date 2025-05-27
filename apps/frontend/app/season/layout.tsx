@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "@repo/uikit/styles/index.css";
+import { MainLayout } from "../components/MainLayout";
 
 export const metadata: Metadata = {
 	title: "Create Next App",
@@ -18,7 +19,7 @@ export default function RootLayout({
 			data-platform="desktop"
 			data-brand="f1-app"
 		>
-			{children}
+			<MainLayout>{children}</MainLayout>
 		</html>
 	);
 }
