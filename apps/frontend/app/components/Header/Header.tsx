@@ -1,3 +1,4 @@
+import React from "react";
 import { MFlex } from "@repo/uikit";
 import { F1Logo } from "../F1Logo";
 import { SeasonSelector } from "../SeasonSelector/SeasonSelector";
