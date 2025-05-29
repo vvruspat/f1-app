@@ -1,0 +1,12 @@
+FROM 459205453152.dkr.ecr.eu-central-1.amazonaws.com/f1app/base-builder:latest AS builder
+WORKDIR /app
+
+# 2. Production image
+FROM node:22-alpine AS runner
+WORKDIR /app
+
+COPY --from=builder /app/apps/frontend/ ./
+COPY --from=builder /app/node_modules ./node_modules
+
+EXPOSE 3000
+CMD ["npm", "run", "start"]

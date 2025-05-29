@@ -1,0 +1,62 @@
+name: Build and Push Docker images to ECR
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  AWS_REGION: eu-central-1
+  AWS_ACCOUNT_ID: 459205453152
+  ECR_BASE_REPO: f1app/base-builder
+  ECR_FRONTEND_REPO: f1app/frontend
+  ECR_BACKEND_REPO: f1app/backend
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+     # ----------------------
+      # Build and Push Builder Base
+      # ----------------------
+      - name: Build and push base builder image
+        run: |
+          docker build -f Dockerfile.builder-base \
+            -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_BASE_REPO:latest .
+          
+          docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_BASE_REPO:latest
+
+      # ----------------------
+      # Build and Push Frontend
+      # ----------------------
+      - name: Build and push frontend image
+        run: |
+          docker build -f Dockerfile.frontend \
+            -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_FRONTEND_REPO:latest .
+
+          docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_FRONTEND_REPO:latest
+
+      # ----------------------
+      # Build and Push Backend
+      # ----------------------
+      - name: Build and push backend image
+        run: |
+          docker build -f Dockerfile.backend \
+            -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_BACKEND_REPO:latest .
+
+          docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_BACKEND_REPO:latest
