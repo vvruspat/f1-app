@@ -154,7 +154,7 @@
 		white 10%
 	);
 	--palette-semantic-warning-300: rgba(240, 151, 0, 1);
-	--palette-semantic-warning-400: rgba(204, 102, 0, 1);
+	--palette-semantic-warning-400: rgba(254, 246, 83, 1);
 	--palette-semantic-warning-500: color-mix(
 		in srgb,
 		var(--palette-semantic-warning-400),
@@ -225,18 +225,17 @@
 		var(--palette-semantic-error-400),
 		black 60%
 	);
-
-	/* ers-palette */
+	/* f1-palette */
 	--palette-base-0: rgba(255, 255, 255, 1);
 	--palette-base-50: rgba(251, 251, 251, 1);
-	--palette-base-100: rgba(245, 245, 245, 1);
-	--palette-base-200: rgba(230, 231, 231, 1);
-	--palette-base-300: rgba(216, 217, 217, 1);
-	--palette-base-400: rgba(123, 132, 132, 1);
-	--palette-base-500: rgba(75, 79, 79, 1);
-	--palette-base-600: rgba(34, 38, 38, 1);
-	--palette-base-700: rgba(24, 28, 28, 1);
-	--palette-base-800: rgba(14, 18, 18, 1);
+	--palette-base-100: rgba(238, 238, 238, 1);
+	--palette-base-200: rgba(227, 227, 227, 1);
+	--palette-base-300: rgba(186, 186, 186, 1);
+	--palette-base-400: rgba(171, 171, 171, 1);
+	--palette-base-500: rgba(112, 112, 112, 1);
+	--palette-base-600: rgba(59, 59, 58, 1);
+	--palette-base-700: rgba(46, 46, 45, 1);
+	--palette-base-800: rgba(31, 31, 31, 1);
 	--palette-base-900: rgba(0, 12, 11, 1);
 	--palette-base-1000: black;
 

@@ -1,8 +1,19 @@
 import type { PropsWithChildren } from "react";
 import { Header } from "../Header";
 import { redirect } from "next/navigation";
+import styles from "./MainLayout.module.css";
+import { MFlex } from "@repo/uikit";
 
-export const MainLayout = async ({ children }: PropsWithChildren) => {
+type MainLayoutProps = PropsWithChildren<{
+	currentSeason?: string;
+	currentTheme: "light" | "dark";
+}>;
+
+export const MainLayout = async ({
+	children,
+	currentSeason,
+	currentTheme,
+}: MainLayoutProps) => {
 	try {
 		const server = process.env.NEXT_WEB_API_URL;
 
@@ -14,10 +25,21 @@ export const MainLayout = async ({ children }: PropsWithChildren) => {
 		const seasons = await res.json();
 
 		return (
-			<body>
-				<Header seasons={seasons} />
-				<main>{children}</main>
-			</body>
+			<MFlex
+				direction="column"
+				justify="start"
+				align="stretch"
+				gap="3xl"
+				className={styles.container}
+			>
+				<Header
+					className={styles.header}
+					seasons={seasons}
+					currentSeason={currentSeason}
+					currentTheme={currentTheme}
+				/>
+				<main className={styles.main}>{children}</main>
+			</MFlex>
 		);
 	} catch (e) {
 		redirect("/error");

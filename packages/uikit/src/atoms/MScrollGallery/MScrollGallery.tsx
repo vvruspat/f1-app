@@ -1,7 +1,9 @@
 import type { PropsWithChildren, ReactNode } from "react";
 
+import { MScrollGalleryController } from "./MScrollGalleryController";
 import styles from "./MScrollGallery.module.css";
 import MFlex from "../MFlex/MFlex";
+import clsx from "clsx";
 
 export type MScrollGalleryItemOption = {
 	/** Key to identify option */
@@ -11,6 +13,7 @@ export type MScrollGalleryItemOption = {
 };
 
 type MScrollGalleryProps = {
+	currentSlide?: MScrollGalleryItemOption["key"];
 	options: MScrollGalleryItemOption[];
 };
 
@@ -18,6 +21,7 @@ type MScrollGalleryProps = {
  * MScrollGallery component
  */
 export const MScrollGallery = ({
+	currentSlide,
 	options,
 }: PropsWithChildren<MScrollGalleryProps>) => {
 	return (
@@ -26,12 +30,22 @@ export const MScrollGallery = ({
 			align="center"
 			justify="center"
 			wrap="nowrap"
-			className={styles.MScrollGallery}
+			className={styles.scrollGallery}
 			dir="ltr"
 		>
+			<MScrollGalleryController
+				currentSlide={`[data-slide="${currentSlide}"]`}
+			/>
 			{options.map((option) => {
 				return (
-					<div key={option.key} className={styles.MScrollGalleryItem}>
+					<div
+						key={option.key}
+						data-slide={option.key}
+						className={clsx(
+							styles.scrollGalleryItem,
+							styles.currentSlide && option.key === currentSlide,
+						)}
+					>
 						{option.value}
 					</div>
 				);

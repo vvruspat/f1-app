@@ -1,26 +1,31 @@
-import React, { type DetailedHTMLProps, type HTMLAttributes, type ReactNode } from 'react';
-import clsx from 'clsx';
-import styles from './MBadge.module.css';
-import './MBadge.vars.css'
+import React, {
+	type DetailedHTMLProps,
+	type HTMLAttributes,
+	type ReactNode,
+} from "react";
+import clsx from "clsx";
+import styles from "./MBadge.module.css";
+import "./MBadge.vars.css";
 
 type BadgeProps = DetailedHTMLProps<
-  HTMLAttributes<HTMLDivElement>,
-  HTMLDivElement
+	HTMLAttributes<HTMLDivElement>,
+	HTMLDivElement
 > & {
-  mode: 'primary' | 'transparent';
-  before?: ReactNode;
+	mode: "primary" | "secondary" | "transparent" | "outlined";
+	before?: ReactNode;
 };
 
 export const MBadge = ({
-  children,
-  mode = 'primary',
-  ...restProps
+	children,
+	mode = "primary",
+	className,
+	...restProps
 }: BadgeProps) => {
-  return (
-    <div className={clsx(styles.badge, styles[mode])} {...restProps}>
-      {children}
-    </div>
-  );
+	return (
+		<div className={clsx(styles.badge, styles[mode], className)} {...restProps}>
+			{children}
+		</div>
+	);
 };
 
 export default MBadge;

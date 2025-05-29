@@ -1,24 +1,42 @@
 .badge {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--badge-whiteSpace-gap, 4px);
-  color: var(--badge-primary-font-color, #1e222a);
-  font-family: var(--font-family, Poppins);
-  font-size: var(--badge-font-size, 16px);
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  cursor: default;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	gap: var(--badge-whiteSpace-gap);
+	color: var(--badge-primary-font-color);
+	font-family: var(--font-family);
+	font-size: var(--badge-font-size);
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	cursor: default;
 }
 
 .badge.primary {
-  padding: var(--badge-primary-padding, 6px);
-  border-radius: var(--badge-primary-border-radius, 8px);
-  background: var(--badge-primary-background-color, #f4f5f7);
+	padding: var(--badge-primary-padding);
+	border: 1px solid var(--badge-primary-border-color);
+	border-radius: var(--badge-primary-border-radius);
+	background: var(--badge-primary-background-color);
+	color: var(--badge-primary-font-color);
+}
+
+.badge.secondary {
+	padding: var(--badge-secondary-padding, 6px);
+	border: 1px solid var(--badge-secondary-border-color);
+	border-radius: var(--badge-secondary-border-radius, 8px);
+	background: var(--badge-secondary-background-color, #f4f5f7);
+	color: var(--badge-secondary-font-color);
+}
+
+.badge.outlined {
+	padding: var(--badge-outlined-padding, 6px);
+	border: 1px solid var(--badge-outlined-border-color);
+	border-radius: var(--badge-outlined-border-radius, 8px);
+	background: var(--badge-outlined-background-color, #f4f5f7);
+	color: var(--badge-outlined-font-color);
 }
 
 .badge.transparent {
-  background: transparent;
-  line-height: 1.25;
+	background: transparent;
+	line-height: 1.25;
 }

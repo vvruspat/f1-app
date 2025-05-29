@@ -1,6 +1,8 @@
 declare const styles: {
-  readonly "MScrollGallery": string;
-  readonly "MScrollGalleryItem": string;
+  readonly "--snap": string;
+  readonly "currentSlide": string;
+  readonly "scrollGallery": string;
+  readonly "scrollGalleryItem": string;
 };
 export = styles;
 

@@ -10,16 +10,19 @@ export const useCountry = () => {
 			?.code.toLowerCase();
 	}, []);
 
-	const getCountryByNationality = useCallback((name: Nationality) => {
-		const nationalityCountry = nationalities.data.find(
-			(nationality) =>
-				nationality.Nationality.toLowerCase() === name.toLowerCase(),
-		);
+	const getCountryByNationality = useCallback(
+		(name: Nationality) => {
+			const nationalityCountry = nationalities.data.find(
+				(nationality) =>
+					nationality.Nationality.toLowerCase() === name.toLowerCase(),
+			);
 
-		if (nationalityCountry) {
-			return nationalityCountry.Code.toLowerCase();
-		}
-	}, []);
+			if (nationalityCountry) {
+				return getCountryByName(nationalityCountry.Country);
+			}
+		},
+		[getCountryByName],
+	);
 
 	return {
 		getCountryByName,

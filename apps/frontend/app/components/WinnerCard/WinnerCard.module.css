@@ -1,0 +1,18 @@
+.collapseIcon {
+	transform: rotate(180deg);
+	transition: transform 0.1s linear;
+	color: var(--text-secondary);
+}
+
+.collapseIcon.collapsed {
+	transform: rotate(360deg);
+}
+
+.winnerTeam {
+	text-transform: uppercase;
+}
+
+.winnerValue {
+	color: var(--text-primary);
+	font-weight: 500;
+}

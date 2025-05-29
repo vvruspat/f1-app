@@ -1,11 +1,43 @@
-:root {
-    --badge-font-size: var(--font-size-l);
-    --badge-whiteSpace-gap: var(--whiteSpace-general-_5x);
-    --badge-primary-padding: var(--size-general-_75x);
-    --badge-primary-border-radius: var(--borderRadius-general-2x);
+:root[data-platform="desktop"],
+:root[data-platform="tablet"],
+:root[data-platform="mobile"] {
+	--badge-font-size: var(--font-size-l);
+	--badge-whiteSpace-gap: var(--whiteSpace-general-_5x);
+
+	--badge-primary-padding: var(--size-general-_5x) var(--size-general-2x);
+	--badge-primary-border-radius: var(--borderRadius-general-4x);
+
+	--badge-secondary-padding: var(--size-general-_5x) var(--size-general-2x);
+	--badge-secondary-border-radius: var(--borderRadius-general-4x);
+
+	--badge-outlined-padding: var(--size-general-_5x) var(--size-general-2x);
+	--badge-outlined-border-radius: var(--borderRadius-general-4x);
 }
 
-:root[data-theme='light'] {
-    --badge-primary-font-color: var(--palette-base-100);
-    --badge-primary-background-color: var(--palette-base-400);
+:root[data-theme="light"] {
+	--badge-primary-font-color: var(--palette-base-0);
+	--badge-primary-background-color: var(--palette-base-800);
+	--badge-primary-border-color: var(--palette-base-800);
+
+	--badge-secondary-font-color: var(--text-secondary);
+	--badge-secondary-background-color: var(--palette-base-100);
+	--badge-secondary-border-color: var(--palette-base-100);
+
+	--badge-outlined-font-color: var(--palette-base-1000);
+	--badge-outlined-background-color: transparent;
+	--badge-outlined-border-color: var(--palette-base-1000);
+}
+
+:root[data-theme="dark"] {
+	--badge-primary-font-color: var(--palette-base-0);
+	--badge-primary-background-color: var(--palette-base-800);
+	--badge-primary-border-color: var(--palette-base-800);
+
+	--badge-secondary-font-color: var(--text-secondary);
+	--badge-secondary-background-color: var(--palette-base-600);
+	--badge-secondary-border-color: var(--palette-base-600);
+
+	--badge-outlined-font-color: var(--palette-base-1000);
+	--badge-outlined-background-color: transparent;
+	--badge-outlined-border-color: var(--palette-base-1000);
 }

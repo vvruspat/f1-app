@@ -1,4 +1,4 @@
-.MScrollGallery {
+.scrollGallery {
 	width: 100%;
 
 	overflow-x: scroll;
@@ -9,10 +9,20 @@
 	box-sizing: border-box;
 }
 
-.MScrollGallery::-webkit-scrollbar {
+.scrollGallery::-webkit-scrollbar {
 	display: none;
 }
 
-.MScrollGalleryItem {
+.scrollGalleryItem {
 	scroll-snap-align: center;
+}
+
+.currentSlide {
+	animation: --snap 0.01s linear;
+}
+
+@keyframes --snap {
+	from {
+		scroll-snap-align: start;
+	}
 }

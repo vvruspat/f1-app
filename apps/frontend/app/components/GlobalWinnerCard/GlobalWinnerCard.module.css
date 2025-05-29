@@ -1,0 +1,20 @@
+.globalWinner {
+	background-color: var(--palette-semantic-warning-400);
+	border-color: var(--palette-semantic-warning-400);
+}
+
+.globalWinner .captionWinner {
+	color: var(--palette-base-1000);
+}
+
+.globalWinner .headerWinner {
+	color: var(--palette-base-1000);
+}
+
+.winnerTeam {
+	text-transform: uppercase;
+}
+
+.globalWinnerPoints {
+	font-weight: 500;
+}

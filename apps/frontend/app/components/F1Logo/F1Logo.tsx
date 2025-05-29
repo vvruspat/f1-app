@@ -16,7 +16,7 @@ export const F1Logo = () => (
 			width="96"
 			height="24"
 		>
-			<path d="M96 0H0V24H96V0Z" fill="currentColor" />
+			<path d="M96 0H0V24H96V0Z" fill="white" />
 		</mask>
 		<g mask="url(#mask0_24_1163)">
 			<mask
@@ -28,7 +28,7 @@ export const F1Logo = () => (
 				width="96"
 				height="24"
 			>
-				<path d="M96 0H0V24H96V0Z" fill="currentColor" />
+				<path d="M96 0H0V24H96V0Z" fill="white" />
 			</mask>
 			<g mask="url(#mask1_24_1163)">
 				<path

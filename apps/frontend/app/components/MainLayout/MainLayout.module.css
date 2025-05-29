@@ -1,0 +1,14 @@
+.container {
+	max-width: 700px;
+	margin: 0 auto;
+	padding-top: var(--whiteSpace-general-4x);
+}
+
+.main {
+	color: var(--text-primary);
+}
+
+.header {
+	max-width: 100%;
+	color: var(--text-primary);
+}

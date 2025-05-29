@@ -6,7 +6,7 @@ import { MIconMoon } from "../MIcon/icons/MIconMoon";
 import { MIconSun } from "../MIcon/icons/MIconSun";
 
 type MThemeSelectorProps = ComponentProps<typeof MButton> & {
-	onSelectedTheme?: (theme: string) => void;
+	onSelectedTheme?: (theme: "light" | "dark") => void;
 	defaultTheme?: string;
 };
 
@@ -31,12 +31,13 @@ export const MThemeSelector = ({
 			if (onSelectedTheme) {
 				onSelectedTheme(newTheme);
 			}
+
 			return newTheme;
 		});
 	};
 
 	return (
-		<MButton onClick={onClick} mode="transparent">
+		<MButton onClick={onClick} mode="transparent" {...restButtonProps}>
 			{selectedTheme === "light" ? (
 				<MIconSun mode="regular" width={24} />
 			) : (

@@ -1,21 +1,35 @@
-import { MFlex, MThemeSelector } from "@repo/uikit";
+import { MFlex } from "@repo/uikit";
 import { F1Logo } from "../F1Logo";
 import { SeasonSelector } from "../SeasonSelector/SeasonSelector";
 import type { Season } from "@repo/types";
+import type { ComponentProps } from "react";
+import { ThemeSelector } from "../ThemeSelector";
 
-type HeaderProps = {
+type HeaderProps = ComponentProps<"header"> & {
 	seasons: Season[];
+	currentSeason?: string;
+	currentTheme: "light" | "dark";
 };
 
-export const Header = ({ seasons }: HeaderProps) => {
+export const Header = ({
+	seasons,
+	currentSeason,
+	currentTheme,
+	...headerProps
+}: HeaderProps) => {
 	return (
-		<header>
-			<MFlex direction="column" justify="space-between" align="stretch">
+		<header {...headerProps}>
+			<MFlex
+				direction="column"
+				justify="space-between"
+				align="stretch"
+				gap="4xl"
+			>
 				<MFlex direction="row" justify="space-between" align="start">
 					<F1Logo />
-					<MThemeSelector />
+					<ThemeSelector defaultTheme={currentTheme} />
 				</MFlex>
-				<SeasonSelector seasons={seasons} />
+				<SeasonSelector seasons={seasons} currentSeason={currentSeason} />
 			</MFlex>
 		</header>
 	);

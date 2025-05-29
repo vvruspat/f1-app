@@ -1,7 +1,7 @@
 :root[data-theme="dark"] {
 	--text-primary: var(--palette-base-0);
 	--text-secondary: var(--palette-base-400);
-	--text-tertiary: var(--palette-base-600);
+	--text-tertiary: var(--palette-base-1000);
 	--background: var(--palette-base-800);
 	--background-secondary: var(--palette-base-600);
 	--background-tertiary: var(--palette-base-400);
