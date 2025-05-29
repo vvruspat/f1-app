@@ -7,5 +7,5 @@ import svgr from "vite-plugin-svgr";
 export default defineConfig({
 	root: __dirname,
 
-	plugins: [react(), svgr(), libInjectCss()],
+	plugins: [react(), svgr({ include: "**/*.svg" }), libInjectCss()],
 });
