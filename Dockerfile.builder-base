@@ -13,7 +13,4 @@ COPY . .
 
 RUN npm ci
 
-RUN npx turbo login
-RUN npx turbo link
-
 RUN npm run build

@@ -29,5 +29,8 @@
 			"cache": false,
 			"persistent": true
 		}
+	},
+	"remoteCache": {
+		"enabled": true
 	}
 }
