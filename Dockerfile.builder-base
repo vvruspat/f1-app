@@ -5,10 +5,11 @@ ARG TURBO_TOKEN
 ARG TURBO_TEAM
 ARG TURBO_CACHE
 
-# If you want them as ENV variables in the image:
 ENV TURBO_TOKEN=$TURBO_TOKEN
 ENV TURBO_TEAM=$TURBO_TEAM
 ENV TURBO_CACHE=$TURBO_CACHE
+
+RUN apk add --no-cache curl
 
 COPY . .
 
