@@ -36,10 +36,12 @@ jobs:
       # ----------------------
       - name: Build and push base builder image
         run: |
-          docker build -f Dockerfile.builder-base \
+            docker build -f Dockerfile.builder-base \
+            --build-arg TURBO_TOKEN=${{ secrets.VERCEL_TOKEN }} \
+            --build-arg TURBO_TEAM=${{ vars.TURBO_TEAM }} \
+            --build-arg TURBO_CACHE=remote:rw \
             -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_BASE_REPO:latest .
-          
-          docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_BASE_REPO:latest
+            docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_BASE_REPO:latest
 
       # ----------------------
       # Build and Push Frontend

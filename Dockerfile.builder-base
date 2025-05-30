@@ -1,8 +1,17 @@
 FROM node:22-alpine AS base-builder
 WORKDIR /app
 
+ARG TURBO_TOKEN
+ARG TURBO_TEAM
+ARG TURBO_CACHE
+
+# If you want them as ENV variables in the image:
+ENV TURBO_TOKEN=$TURBO_TOKEN
+ENV TURBO_TEAM=$TURBO_TEAM
+ENV TURBO_CACHE=$TURBO_CACHE
+
 COPY . .
 
-RUN npm install
+RUN npm ci
 
 RUN npm run build
