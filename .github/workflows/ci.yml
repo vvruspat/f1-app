@@ -6,6 +6,11 @@ on:
   pull_request:
     types: [opened, synchronize]
 
+permissions:
+  contents: read
+  actions: read
+  security-events: write
+
 jobs:
   snyk:
     uses: ./.github/workflows/snyk-security.yml
