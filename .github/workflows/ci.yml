@@ -1,8 +1,8 @@
-name: CI
+name: Lint and Test
  
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "staging"]
   pull_request:
     types: [opened, synchronize]
  
