@@ -1,13 +1,8 @@
 name: Build and Push Docker images to ECR
 
-# on:
-#   push:
-#     branches:
-#       - main
-
 on:
   workflow_run:
-    workflows: ["Predeploy checkup"]
+    workflows: ["Lint and Test"]
     types:
       - completed
     branches:
