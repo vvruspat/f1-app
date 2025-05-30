@@ -15,21 +15,21 @@ import { Keyv } from "keyv";
 		ConfigModule.forRoot({
 			isGlobal: true,
 		}),
-		// CacheModule.registerAsync({
-		// 	isGlobal: true,
-		// 	imports: [ConfigModule],
-		// 	inject: [ConfigService],
-		// 	useFactory: async (configService: ConfigService) => {
-		// 		return {
-		// 			stores: [
-		// 				new KeyvRedis(configService.get<string>("REDIS_URI")),
-		// 				new Keyv({
-		// 					store: new CacheableMemory({ ttl: 60000, lruSize: 5000 }),
-		// 				}),
-		// 			],
-		// 		};
-		// 	},
-		// }),
+		CacheModule.registerAsync({
+			isGlobal: true,
+			imports: [ConfigModule],
+			inject: [ConfigService],
+			useFactory: async (configService: ConfigService) => {
+				return {
+					stores: [
+						new KeyvRedis(configService.get<string>("REDIS_URI")),
+						new Keyv({
+							store: new CacheableMemory({ ttl: 60000, lruSize: 5000 }),
+						}),
+					],
+				};
+			},
+		}),
 		MongooseModule.forRootAsync({
 			imports: [ConfigModule],
 			inject: [ConfigService],
