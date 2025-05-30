@@ -8,7 +8,11 @@ export async function GET() {
 
 		if (!res.ok) {
 			return NextResponse.json(
-				{ error: "Failed to fetch seasons" },
+				{
+					error: "Failed to fetch seasons",
+					status: res.status,
+					url: `${backendUrl}/seasons`,
+				},
 				{ status: res.status },
 			);
 		}
