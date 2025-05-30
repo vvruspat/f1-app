@@ -6,8 +6,7 @@ WORKDIR /app
 
 RUN apk add --no-cache curl
 
-COPY --from=builder /app/apps/backend/ ./
-COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/apps/backend/dist ./dist
 
 RUN curl -o ./global-bundle.pem https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem
 
