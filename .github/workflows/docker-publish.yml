@@ -11,6 +11,10 @@ env:
   ECR_BASE_REPO: f1app/base-builder
   ECR_FRONTEND_REPO: f1app/frontend
   ECR_BACKEND_REPO: f1app/backend
+  ECS_FRONTEND_CLUSTER: f1app-frontend
+  ECS_BACKEND_CLUSTER: f1app-backend
+  ECS_FRONTEND_SERVICE: f1-app-frontend-task-service
+  ECS_BACKEND_SERVICE: f1-app-backend-task-service
 
 jobs:
   build-and-push:
@@ -31,7 +35,7 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-     # ----------------------
+      # ----------------------
       # Build and Push Builder Base
       # ----------------------
       - name: Build and push base builder image
@@ -62,3 +66,23 @@ jobs:
             -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_BACKEND_REPO:latest .
 
           docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_BACKEND_REPO:latest
+
+      # ----------------------
+      # Deploy to ECS - Frontend
+      # ----------------------
+      - name: Force new deployment of frontend service
+        run: |
+          aws ecs update-service \
+            --cluster $ECS_FRONTEND_CLUSTER \
+            --service $ECS_FRONTEND_SERVICE \
+            --force-new-deployment
+
+      # ----------------------
+      # Deploy to ECS - Backend
+      # ----------------------
+      - name: Force new deployment of backend service
+        run: |
+          aws ecs update-service \
+            --cluster $ECS_BACKEND_CLUSTER \
+            --service $ECS_BACKEND_SERVICE \
+            --force-new-deployment
