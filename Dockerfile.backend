@@ -9,8 +9,7 @@ RUN apk add --no-cache curl
 COPY --from=builder /app/apps/backend/ ./
 COPY --from=builder /app/node_modules ./node_modules
 
-RUN curl -o /app/apps/backend/global-bundle.pem \
-    https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem
+RUN curl -o ./global-bundle.pem https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem
 
 EXPOSE 3002
 CMD ["npm", "run", "start:prod"]
