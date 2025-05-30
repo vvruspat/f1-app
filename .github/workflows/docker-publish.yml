@@ -7,7 +7,7 @@ name: Build and Push Docker images to ECR
 
 on:
   workflow_run:
-    workflows: ["Snyk Security", "Lint and Test"]
+    workflows: ["Predeploy checkup"]
     types:
       - completed
     branches:
