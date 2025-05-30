@@ -11,6 +11,9 @@ permissions:
   actions: read
   security-events: write
 
+env:
+    SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
 jobs:
   snyk:
     uses: ./.github/workflows/snyk-security.yml
