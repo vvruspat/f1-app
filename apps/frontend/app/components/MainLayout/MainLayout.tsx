@@ -3,6 +3,7 @@ import { Header } from "../Header";
 import { redirect } from "next/navigation";
 import styles from "./MainLayout.module.css";
 import { MFlex } from "@repo/uikit";
+import { getSeasonsAction } from "../../actions/getSeasonsAction";
 
 type MainLayoutProps = PropsWithChildren<{
 	currentSeason?: string;
@@ -15,14 +16,9 @@ export const MainLayout = async ({
 	currentTheme,
 }: MainLayoutProps) => {
 	try {
-		const server = process.env.NEXT_WEB_API_URL;
+		const { data: seasons, error } = await getSeasonsAction();
 
-		const res = await fetch(`${server}/seasons`);
-
-		if (!res.ok) {
-			redirect("/500");
-		}
-		const seasons = await res.json();
+		if (!seasons || error) throw Error(error ?? "Unknown error");
 
 		return (
 			<MFlex

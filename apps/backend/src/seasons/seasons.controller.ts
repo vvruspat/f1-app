@@ -1,4 +1,5 @@
 import { Controller, Get, UseInterceptors } from "@nestjs/common";
+// biome-ignore lint/style/useImportType: service should be imported in js bundle
 import { SeasonsService } from "./seasons.service";
 import type { Season } from "@repo/types";
 import { CacheInterceptor, CacheTTL } from "@nestjs/cache-manager";
