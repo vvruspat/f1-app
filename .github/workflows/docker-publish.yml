@@ -18,7 +18,7 @@ env:
   ECS_FRONTEND_CLUSTER: f1app-frontend
   ECS_BACKEND_CLUSTER: f1app-backend
   ECS_FRONTEND_SERVICE: f1-app-frontend-task-service
-  ECS_DOCS_SERVICE: f1-app-docs-task-service
+  ECS_DOCS_SERVICE: f1-app-app-docs-task-service
   ECS_BACKEND_SERVICE: f1-app-backend-task-service
 
 jobs:
