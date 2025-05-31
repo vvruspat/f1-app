@@ -20,7 +20,7 @@ name: Snyk Security Check
 
 on:
   push:
-    branches: ["main", "staging"]
+    branches: ["main"]
   pull_request:
     types: [opened, synchronize]
 
