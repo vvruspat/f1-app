@@ -9,6 +9,7 @@ import type {
 	SeasonsErgastResponse,
 } from "@repo/types";
 import { $fetch } from "../utils/fetch";
+// biome-ignore lint/style/useImportType: service should be imported in js bundle
 import { ConfigService } from "@nestjs/config";
 
 @Injectable()
