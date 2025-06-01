@@ -25,7 +25,7 @@ export default {
 	],
 	moduleNameMapper: {
 		"^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
-		"\\.svg\\?react$": "<rootDir>/__mocks__/svgTransform.js",
+		"\\.svg\\$": "<rootDir>/__mocks__/svgTransform.js",
 		"\\.(svg)$": "<rootDir>/__mocks__/svg.js",
 	},
 	testEnvironment: "jsdom",

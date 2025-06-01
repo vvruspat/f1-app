@@ -14,7 +14,7 @@ export const MScrollGalleryController = ({
 		const targetEl = containerEl?.querySelector(currentSlide);
 
 		targetEl?.scrollIntoView({
-			behavior: "instant",
+			behavior: "smooth",
 			block: "center",
 			inline: "center",
 		});

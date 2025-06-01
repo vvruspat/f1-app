@@ -15,6 +15,7 @@ jobs:
      TURBO_TOKEN: ${{ secrets.VERCEL_TOKEN }}
      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
      TURBO_CACHE: remote:rw
+     SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
  
     steps:
       - name: Check out code
@@ -30,8 +31,13 @@ jobs:
  
       - name: Install dependencies
         run: npm ci
+
+      - name: Sentry login
+        run: npx sentry-cli login --auth-token ${{ secrets.SENTRY_AUTH_TOKEN }}
  
       - name: CI lint / test / build
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
         run: npm run ci
 
  

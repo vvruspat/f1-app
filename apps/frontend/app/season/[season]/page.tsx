@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { Winners } from "../../components/Winners";
-import type { F1SeasonResults } from "@repo/types";
+import { getSeasonWinnersAction } from "../../actions/getSeasonWinnersAction";
 
 export default async function SeasonResultPage({
 	params,
@@ -8,17 +8,13 @@ export default async function SeasonResultPage({
 	params: Promise<{ season: string }>;
 }) {
 	try {
-		const server = process.env.NEXT_WEB_API_URL;
 		const season = (await params).season;
 
-		const res = await fetch(`${server}/seasons/${season}`);
+		const results = await getSeasonWinnersAction(season);
 
-		if (!res.ok) {
-			redirect("/500");
-		}
-		const results = (await res.json()) as F1SeasonResults;
+		if (results.error || !results.data) redirect("/error");
 
-		return <Winners {...results} />;
+		return <Winners {...results.data} />;
 	} catch (e) {
 		redirect("/error");
 	}

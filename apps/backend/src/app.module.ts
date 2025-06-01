@@ -9,9 +9,11 @@ import { CacheModule } from "@nestjs/cache-manager";
 import { CacheableMemory } from "cacheable";
 import KeyvRedis from "@keyv/redis";
 import { Keyv } from "keyv";
+import { SentryModule } from "@sentry/nestjs/setup";
 
 @Module({
 	imports: [
+		SentryModule.forRoot(),
 		ConfigModule.forRoot({
 			isGlobal: true,
 		}),

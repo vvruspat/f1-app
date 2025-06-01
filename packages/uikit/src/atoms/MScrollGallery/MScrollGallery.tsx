@@ -28,7 +28,7 @@ export const MScrollGallery = ({
 		<MFlex
 			direction="row"
 			align="center"
-			justify="center"
+			justify="normal"
 			wrap="nowrap"
 			className={styles.scrollGallery}
 			dir="ltr"

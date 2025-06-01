@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "@repo/uikit/styles/index.css";
-import { MainLayout } from "../../components/MainLayout";
+import { MainLayout } from "../components/MainLayout";
 import { cookies } from "next/headers";
 
 type Props = {
