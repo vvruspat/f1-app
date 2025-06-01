@@ -1,6 +1,6 @@
 import React from "react";
 import { IconModeIndex, type MIconProps } from "../types";
-import Icon from "../../../icons/Communication/AddressBook.svg?react";
+import Icon from "../../../icons/Communication/AddressBook.svg";
 
 export const MIconAddressBook = ({
 	mode,

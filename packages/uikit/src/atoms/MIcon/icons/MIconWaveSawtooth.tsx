@@ -1,30 +1,30 @@
-import React from 'react';
-import { IconModeIndex, type MIconProps } from '../types';
-import Icon from '../../../icons/Media/WaveSawtooth.svg?react';
+import React from "react";
+import { IconModeIndex, type MIconProps } from "../types";
+import Icon from "../../../icons/Media/WaveSawtooth.svg";
 
 export const MIconWaveSawtooth = ({
-  mode,
-  width,
-  height,
-  viewBox,
-  ...restProps
+	mode,
+	width,
+	height,
+	viewBox,
+	...restProps
 }: MIconProps) => {
-  const gap = 16;
-  const finalWidth = Number(width ?? 32);
-  const finalHeight = Number(height ?? finalWidth);
-  const xPosition = (IconModeIndex.get(mode) ?? 0) * (32 + gap);
-  const finalViewBox = viewBox ?? `${xPosition} 0 32 32`;
+	const gap = 16;
+	const finalWidth = Number(width ?? 32);
+	const finalHeight = Number(height ?? finalWidth);
+	const xPosition = (IconModeIndex.get(mode) ?? 0) * (32 + gap);
+	const finalViewBox = viewBox ?? `${xPosition} 0 32 32`;
 
-  return (
-    <>
-      {
-        <Icon
-          width={finalWidth}
-          height={finalHeight}
-          viewBox={finalViewBox}
-          {...restProps}
-        />
-      }
-    </>
-  );
+	return (
+		<>
+			{
+				<Icon
+					width={finalWidth}
+					height={finalHeight}
+					viewBox={finalViewBox}
+					{...restProps}
+				/>
+			}
+		</>
+	);
 };
