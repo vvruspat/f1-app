@@ -49,6 +49,7 @@ jobs:
             --build-arg TURBO_TOKEN=${{ secrets.VERCEL_TOKEN }} \
             --build-arg TURBO_TEAM=${{ vars.TURBO_TEAM }} \
             --build-arg TURBO_CACHE=remote:rw \
+            --build-arg SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }} \
             -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_BASE_REPO:latest .
             docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_BASE_REPO:latest
 
