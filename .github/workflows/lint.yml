@@ -15,6 +15,7 @@ jobs:
      TURBO_TOKEN: ${{ secrets.VERCEL_TOKEN }}
      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
      TURBO_CACHE: remote:rw
+     SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
  
     steps:
       - name: Check out code
