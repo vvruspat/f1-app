@@ -19,7 +19,7 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	const mdPath = path.join("../../packages/md-docs/src/index.md");
+	const mdPath = path.join("public/md-docs/index.md");
 
 	let markdown = "";
 	try {
@@ -43,14 +43,14 @@ export default function RootLayout({
 					gap="2xl"
 					className={styles.container}
 				>
-					<MCard>
+					<MCard align="start" justify="start">
 						<aside>
 							<nav>
 								<ReactMarkdown {...options}>{markdown}</ReactMarkdown>
 							</nav>
 						</aside>
 					</MCard>
-					<MCard className={styles.content}>
+					<MCard align="start" justify="start" className={styles.content}>
 						<main>{children}</main>
 					</MCard>
 				</MFlex>

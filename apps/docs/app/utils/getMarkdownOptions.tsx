@@ -47,14 +47,18 @@ export const getMarkdownOptions = (): Readonly<Options> => {
 				</MFlex>
 			),
 			li: (props) => (
-				<MFlex direction="row" align="center" justify="start" gap="s">
-					{props.children}
+				<MFlex direction="row" align="center" justify="start" gap="xs">
+					- {props.children}
 				</MFlex>
 			),
 			code: (props) => (
 				<MBadge
 					mode="secondary"
-					style={{ borderRadius: "var(--border-radius-s)" }}
+					style={{
+						borderRadius: "var(--border-radius-s)",
+						padding:
+							"var(--whiteSpace-general-_25x) var(--whiteSpace-general-1x)",
+					}}
 				>
 					{props.children}
 				</MBadge>
@@ -64,6 +68,30 @@ export const getMarkdownOptions = (): Readonly<Options> => {
 					{props.children}
 				</pre>
 			),
+			img: (props) => {
+				if (!props.src || typeof props.src !== "string") {
+					return null;
+				}
+
+				return (
+					<a
+						href={`/md-docs/${props.src}`}
+						target="_blank"
+						style={{ display: "block", maxWidth: "100%" }}
+						rel="noreferrer"
+					>
+						<img
+							src={`/md-docs/${props.src}`}
+							alt={props.alt ?? ""}
+							style={{
+								maxWidth: "100%",
+								height: "auto",
+								borderRadius: "var(--border-radius-m)",
+							}}
+						/>
+					</a>
+				);
+			},
 		},
 		urlTransform: (url) => {
 			return url.replace(".md", "");

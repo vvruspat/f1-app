@@ -10,7 +10,7 @@ A full-stack web application displaying Formula 1 World Champions from 2005 to t
 - **CI/CD & QA:** Snyk, Biome, GitHub Actions, Multi-stage Dockerfiles
 
 ## Architecture Diagram
-(Refer to the included image in the repository)
+![Architecture Diagram](../images/architecture-diagram.png)
 
 ## Key Trade-offs & Design Decisions
 - Chose MongoDB for flexible schema
