@@ -11,11 +11,7 @@ export default async function DocPage({
 }: { params: Promise<{ slug: string }> }) {
 	const slug = (await params).slug;
 
-	const mdPath = path.resolve(
-		process.cwd(),
-		"../../packages/md-docs/src",
-		`${slug}.md`,
-	);
+	const mdPath = path.resolve(process.cwd(), "public/md-docs", `${slug}.md`);
 
 	let markdown = "";
 	try {

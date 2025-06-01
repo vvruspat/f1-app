@@ -1,8 +1,0 @@
-{
-	"name": "@repo/md-docs",
-	"version": "0.0.1",
-	"license": "MIT",
-	"type": "module",
-	"private": true,
-	"workspaces": ["*"]
-}
