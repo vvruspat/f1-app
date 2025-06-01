@@ -1,0 +1,10 @@
+.container {
+	min-height: 100vh;
+	min-width: 100%;
+	box-sizing: border-box;
+	padding: var(--whiteSpace-general-2x);
+}
+
+.content {
+	flex: 1;
+}

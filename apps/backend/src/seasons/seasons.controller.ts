@@ -1,4 +1,4 @@
-import { Controller, Get, UseInterceptors } from "@nestjs/common";
+import { Controller, Get, Query, UseInterceptors } from "@nestjs/common";
 // biome-ignore lint/style/useImportType: service should be imported in js bundle
 import { SeasonsService } from "./seasons.service";
 import type { Season } from "@repo/types";
@@ -14,7 +14,7 @@ export class SeasonsController {
 	@UseInterceptors(CacheInterceptor)
 	@ApiOkResponse({ type: Array<SeasonDto> })
 	@Get("seasons")
-	async getSeasons(): Promise<Season[]> {
-		return await this.seasonsService.getSeasons();
+	async getSeasons(@Query("season") from = "2005"): Promise<Season[]> {
+		return await this.seasonsService.getSeasons(from);
 	}
 }

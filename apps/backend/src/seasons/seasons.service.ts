@@ -10,8 +10,10 @@ export class SeasonsService {
 		@InjectModel(SeasonModel.name) private seasonModel: Model<SeasonModel>,
 	) {}
 
-	async getSeasons(): Promise<Season[]> {
-		const seasons = await this.seasonModel.find().lean();
+	async getSeasons(from: Season["season"]): Promise<Season[]> {
+		const seasons = await this.seasonModel
+			.find({ season: { $gte: from } })
+			.lean();
 
 		if (seasons.length === 0) {
 			return [];

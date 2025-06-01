@@ -14,6 +14,7 @@ export async function getSeasonsAction(): Promise<APIResponse<Season[]>> {
 			};
 		}
 		const data = await res.json();
+
 		return { data };
 	} catch (error) {
 		return { error: "Server error" };
