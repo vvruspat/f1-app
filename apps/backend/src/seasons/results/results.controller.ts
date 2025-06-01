@@ -1,6 +1,5 @@
 import { Controller, Get, Param, UseInterceptors } from "@nestjs/common";
 import { ApiOkResponse, ApiTags, ApiParam } from "@nestjs/swagger";
-// biome-ignore lint/style/useImportType: service should be imported in js bundle
 import { SeasonResultsService } from "./results.service";
 import type { F1SeasonResults } from "@repo/types";
 import { F1SeasonResultsDto } from "../../dto/f1-season-results.dto";
