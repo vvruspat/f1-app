@@ -15,9 +15,7 @@ export async function getSeasonWinnersAction(
 				error: `Failed to fetch season ${season} winners`,
 			};
 		}
-		const data = await res.json();
-
-		return { data };
+		return await res.json();
 	} catch (error) {
 		return { error: "Server error" };
 	}

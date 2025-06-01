@@ -5,43 +5,55 @@ import { ConstructorDto } from "./constructor.dto";
 import { DriverDto } from "./driver.dto";
 import { FastestLapDto } from "./fastest-lap.dto";
 import { TimeDto } from "./time.dto";
+import { ApiProperty } from "@nestjs/swagger";
 
 export class RaceResultDto implements RaceResult {
-	@IsString()
-	number!: string;
+    @ApiProperty({ description: 'Car number of the driver', type: String })
+    @IsString()
+    number!: string;
 
-	@IsString()
-	position!: string;
+    @ApiProperty({ description: 'Finishing position of the driver', type: String })
+    @IsString()
+    position!: string;
 
-	@IsInt()
-	positionText!: string;
+    @ApiProperty({ description: 'Text representation of the finishing position (e.g., "1", "DNF")', type: String })
+    @IsString() // Changed from IsInt to match string type
+    positionText!: string;
 
-	@IsInt()
-	points!: number;
+    @ApiProperty({ description: 'Points awarded to the driver', type: Number })
+    @IsInt()
+    points!: number;
 
-	@ValidateNested()
-	@Type(() => DriverDto)
-	Driver!: DriverDto;
+    @ApiProperty({ description: 'Driver details', type: () => DriverDto })
+    @ValidateNested()
+    @Type(() => DriverDto)
+    Driver!: DriverDto;
 
-	@ValidateNested()
-	@Type(() => ConstructorDto)
-	Constructor!: ConstructorDto;
+    @ApiProperty({ description: 'Constructor details', type: () => ConstructorDto })
+    @ValidateNested()
+    @Type(() => ConstructorDto)
+    Constructor!: ConstructorDto;
 
-	@IsInt()
-	grid!: number;
+    @ApiProperty({ description: 'Starting grid position of the driver', type: Number })
+    @IsInt()
+    grid!: number;
 
-	@IsInt()
-	laps!: number;
+    @ApiProperty({ description: 'Number of laps completed by the driver', type: Number })
+    @IsInt()
+    laps!: number;
 
-	@IsString()
-	status!: string;
+    @ApiProperty({ description: 'Finishing status of the driver (e.g., Finished, +1 Lap)', type: String })
+    @IsString()
+    status!: string;
 
-	@IsOptional()
-	@ValidateNested()
-	@Type(() => TimeDto)
-	Time?: TimeDto;
+    @ApiProperty({ description: 'Total race time for the driver', type: () => TimeDto, required: false })
+    @IsOptional()
+    @ValidateNested()
+    @Type(() => TimeDto)
+    Time?: TimeDto;
 
-	@ValidateNested()
-	@Type(() => FastestLapDto)
-	FastestLap!: FastestLapDto;
+    @ApiProperty({ description: 'Fastest lap details for the driver', type: () => FastestLapDto })
+    @ValidateNested()
+    @Type(() => FastestLapDto)
+    FastestLap!: FastestLapDto;
 }

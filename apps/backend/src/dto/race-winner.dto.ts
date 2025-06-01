@@ -1,37 +1,49 @@
 import type { RaceWinner } from "@repo/types";
 import { IsString, IsInt } from "class-validator";
+import { ApiProperty } from "@nestjs/swagger";
 
 export class RaceWinnerDto implements RaceWinner {
-	@IsString()
-	driver!: string;
+    @ApiProperty({ description: 'Name of the winning driver', type: String })
+    @IsString()
+    driver!: string;
 
-	@IsInt()
-	points!: number;
+    @ApiProperty({ description: 'Points scored by the winner', type: Number })
+    @IsInt()
+    points!: number;
 
-	@IsString()
-	team!: string;
+    @ApiProperty({ description: 'Team of the winning driver', type: String })
+    @IsString()
+    team!: string;
 
-	@IsString()
-	nationality!: string;
+    @ApiProperty({ description: 'Nationality of the winning driver', type: String })
+    @IsString()
+    nationality!: string;
 
-	@IsString()
-	round!: string;
+    @ApiProperty({ description: 'Round number of the race', type: String })
+    @IsString()
+    round!: string;
 
-	@IsString()
-	date!: string;
+    @ApiProperty({ description: 'Date of the race', type: String })
+    @IsString()
+    date!: string;
 
-	@IsString()
-	raceTitle!: string;
+    @ApiProperty({ description: 'Title of the race', type: String })
+    @IsString()
+    raceTitle!: string;
 
-	@IsString()
-	country!: string;
+    @ApiProperty({ description: 'Country where the race was held', type: String })
+    @IsString()
+    country!: string;
 
-	@IsString()
-	circuit!: string;
+    @ApiProperty({ description: 'Circuit where the race was held', type: String })
+    @IsString()
+    circuit!: string;
 
-	@IsString()
-	time!: string;
+    @ApiProperty({ description: 'Winning time', type: String })
+    @IsString()
+    time!: string;
 
-	@IsString()
-	speed!: string;
+    @ApiProperty({ description: 'Average speed of the winner', type: String })
+    @IsString()
+    speed!: string;
 }

@@ -15,5 +15,7 @@ A full-stack web application displaying Formula 1 World Champions from 2005 to t
 ## Key Trade-offs & Design Decisions
 - Chose MongoDB for flexible schema
 - Redis for performance on cold starts
-- Turborepo monorepo for separation of concerns
+- Turborepo for optimizing build and ci processes
+- Biome.js for high speed formatting and linting
+- Nest.js for flexible and powerfull platform for backend development
 - Next.js for hybrid SSR/SPA needs

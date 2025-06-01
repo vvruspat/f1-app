@@ -8,6 +8,7 @@
 		"format": "turbo run format",
 		"test": "turbo run test",
 		"test:e2e": "turbo run test:e2e",
+		"test:cov": "turbo run test:cov",
 		"ci": "turbo run lint build",
 		"check-types": "turbo run check-types",
 		"csstypes": "turbo run csstypes",

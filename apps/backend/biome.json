@@ -7,7 +7,8 @@
 			"dist/**/*",
 			".turbo/**/*",
 			".next/**/*",
-			".build/**/*"
+			".build/**/*",
+			"coverage/**/*"
 		]
 	},
 	"linter": {

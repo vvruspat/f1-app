@@ -1,10 +1,8 @@
 # 📈 Monitoring & Observability
 
-## Optional Features
-- Logging via console or Winston
-- Sentry for error reporting (optional)
+- Sentry for error reporting both on backend and frontend side
 - ECS Logs via AWS CloudWatch
 
 ## Deployment Monitoring
 - ECS health checks
-- Auto-restart on failure
+- Github Actions alerts

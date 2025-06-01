@@ -39,11 +39,13 @@ describe("SeasonResultsController", () => {
 		it("should return season results with winner info", async () => {
 			const season = "2023";
 			const mockResult = {
-				season: "2022",
-				Races: raceWinners,
-				Winner: {
-					globalWinner: winnerResult,
-					racesWinners: racesWinnersResult,
+				data: {
+					season: "2022",
+					Races: raceWinners,
+					Winner: {
+						globalWinner: winnerResult,
+						racesWinners: racesWinnersResult,
+					},
 				},
 			};
 			jest

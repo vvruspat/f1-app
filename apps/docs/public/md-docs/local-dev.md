@@ -20,7 +20,8 @@ npm run docker:build
 npm run docker:dev
 ```
 
-`npm run docker:dev` starts all the containers including MongoDB & Redis
+npm run docker:dev runs all the containers including MongoDB & Redis
+
 
 ## Developing without Docker
 
@@ -37,8 +38,8 @@ npm run dev
 
 ## Access
 
-- Frontend: http://localhost:3000
-- Docs: http://localhost:3000
-- Backend: http://localhost:3002
-- Swagger: http://localhost:3002/api
-- UIKit Storybook: http://localhost:6006
+- Frontend: [http://localhost:3000](http://localhost:3000)
+- Docs: [http://localhost:3001](http://localhost:3001)
+- Backend: [http://localhost:3002](http://localhost:3002)
+- Swagger: [http://localhost:3002/api](http://localhost:3002/api)
+- UIKit Storybook: [http://localhost:6006](http://localhost:6006)
