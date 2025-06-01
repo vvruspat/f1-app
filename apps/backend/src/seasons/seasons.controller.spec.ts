@@ -1,7 +1,7 @@
 import { Test, type TestingModule } from "@nestjs/testing";
 import { SeasonsController } from "./seasons.controller";
 import { SeasonsService } from "./seasons.service";
-import type { Season } from "@repo/types";
+import type { APIResponse, Season } from "@repo/types";
 import { CACHE_MANAGER } from "@nestjs/cache-manager";
 
 describe("SeasonsController", () => {
@@ -31,10 +31,12 @@ describe("SeasonsController", () => {
 
 	describe("getSeasons", () => {
 		it("should return an array of seasons", async () => {
-			const result: Season[] = [
-				{ season: "2023", url: "https://example.com/2023" },
-				{ season: "2024", url: "https://example.com/2024" },
-			];
+			const result: APIResponse<Season[]> = {
+				data: [
+					{ season: "2023", url: "https://example.com/2023" },
+					{ season: "2024", url: "https://example.com/2024" },
+				],
+			};
 			jest.spyOn(seasonsService, "getSeasons").mockResolvedValue(result);
 
 			expect(await seasonsController.getSeasons()).toBe(result);

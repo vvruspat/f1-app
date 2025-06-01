@@ -1,11 +1,12 @@
 import { Controller, Get, Param, UseInterceptors } from "@nestjs/common";
-import { ApiOkResponse, ApiTags, ApiParam } from "@nestjs/swagger";
+import { ApiTags, ApiParam, ApiResponse } from "@nestjs/swagger";
 import { SeasonResultsService } from "./results.service";
-import type { F1SeasonResults } from "@repo/types";
-import { F1SeasonResultsDto } from "../../dto/f1-season-results.dto";
+import type { APIResponse, F1SeasonResults } from "@repo/types";
 import { CacheInterceptor, CacheTTL } from "@nestjs/cache-manager";
+import { SeasonResultsResponseDto } from "../../dto/endpoints/season-results.response.dto";
+import { APIErrorDto } from "../../dto/error.dto";
 
-@ApiTags("season-results")
+@ApiTags("Seasons")
 @Controller()
 export class SeasonResultsController {
 	constructor(private readonly seasonResultsService: SeasonResultsService) {}
@@ -14,10 +15,20 @@ export class SeasonResultsController {
 	@UseInterceptors(CacheInterceptor)
 	@Get("seasons/:season")
 	@ApiParam({ name: "season", type: String, description: "Season year" })
-	@ApiOkResponse({ type: F1SeasonResultsDto })
+	@ApiResponse({ status: 200, type: SeasonResultsResponseDto })
+	@ApiResponse({
+		status: 404,
+		description: "Season not found",
+		type: APIErrorDto,
+	})
+	@ApiResponse({
+		status: 500,
+		description: "Internal server error",
+		type: APIErrorDto,
+	})
 	async getSeasonResults(
 		@Param("season") season: string,
-	): Promise<F1SeasonResults> {
+	): Promise<APIResponse<F1SeasonResults>> {
 		return await this.seasonResultsService.getSeasonResults(season);
 	}
 }

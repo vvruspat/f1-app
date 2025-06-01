@@ -1,6 +1,12 @@
 {
 	"extends": ["../../biome.json"],
 	"files": {
-		"ignore": ["node_modules/**/*", "dist/**/*", ".turbo/**/*", ".build/**/*"]
+		"ignore": [
+			"node_modules/**/*",
+			"dist/**/*",
+			".turbo/**/*",
+			".build/**/*",
+			"coverage/**/*"
+		]
 	}
 }

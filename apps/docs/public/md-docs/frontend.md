@@ -1,7 +1,8 @@
 # 🖥️ Frontend
 
 ## Tech Stack
-- React + Next.js
+- React 19
+- Next.js 15
 - TypeScript
 - Custom UI Kit (Storybook)
 - React Testing Library (unit/component tests)
@@ -9,10 +10,10 @@
 ## Key Features
 - SPA with SSR
 - Visual highlighting of champions
-- Modern state management (e.g. useContext/useReducer or Zustand)
-- Loading and error state handling
+- Dark/Light themes
+- A11y
 
 ## Testing
 - React Testing Library
-- 100% unit test coverage for components
+- 90%+ unit test coverage for components
 - Storybook for visual regression and documentation

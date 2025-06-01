@@ -13,9 +13,7 @@ export async function getSeasonsAction(): Promise<APIResponse<Season[]>> {
 				error: "Failed to fetch seasons",
 			};
 		}
-		const data = await res.json();
-
-		return { data };
+		return await res.json();
 	} catch (error) {
 		return { error: "Server error" };
 	}

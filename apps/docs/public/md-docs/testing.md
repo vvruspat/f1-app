@@ -5,12 +5,15 @@
 - Snapshot and behavior testing
 - Coverage: 90%+
 
+![Coverage UIKit](../images/coverage-uikit.png)
+
 ## Backend
 - Jest
 - Unit and integration tests
-- Mocking Ergast API
-- Coverage reports generated via `--coverage`
+- Coverage: 80%+
+
+![Coverage UIKit](../images/coverage-backend.png)
 
 ## CI Integration
-- Tests executed on every push
-- Coverage thresholds enforced
+- Tests executed on pre-commit 
+- Pipeline with tests and lint runs on every pull request creation
