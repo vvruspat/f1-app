@@ -7,7 +7,7 @@ A full-stack web application displaying Formula 1 World Champions from 2005 to t
 - **Frontend:** React, Next.js, TypeScript, Custom UI Kit, Storybook, RTL
 - **Backend:** NestJS, TypeScript, Redis, MongoDB
 - **Infrastructure:** Docker Compose, GitHub Actions, AWS ECS/ECR
-- **CI/CD & QA:** Snyk, Biome, GitHub Actions, Multi-stage Dockerfiles
+- **CI/CD & QA:** Snyk, Biome, GitHub Actions, Multi-stage Dockerfiles, Playwright, Jest
 
 ## Architecture Diagram
 ![Architecture Diagram](../images/architecture-diagram.png)

@@ -37,7 +37,9 @@ The pipeline consists of several sequential stages, each designed to validate th
     *   **Integration:** Uses `SENTRY_AUTH_TOKEN` for Sentry integration (if applicable to Snyk setup, though Snyk usually has its own `SNYK_TOKEN`).
     *   **Failure:** If critical vulnerabilities are found, the pipeline fails, preventing insecure code from being deployed.
 
-- - following stages runs only in main branch
+----------------------------------------------
+- following stages runs only in main branch
+----------------------------------------------
 
 7.  **Build Application(s):**
     *   **Purpose:** Compiles the frontend (Next.js) and backend (NestJS) applications into production-ready artifacts, running `npm run build` for each application.
