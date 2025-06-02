@@ -34,9 +34,11 @@ export const GlobalWinnerCard = ({
 			<MFlex direction="column" align="stretch" justify="start">
 				<MFlex justify="space-between">
 					<MFlex direction="column" align="start" justify="start">
-						<MCaption className={styles.captionWinner}>
-							WINNER {season}
-						</MCaption>
+						<MHeading mode="h1" className={styles.winnerBlockTitle}>
+							<MCaption className={styles.captionWinner}>
+								WINNER {season}
+							</MCaption>
+						</MHeading>
 						<MHeading mode="h2" className={styles.headerWinner}>
 							{globalWinner.driver}
 						</MHeading>

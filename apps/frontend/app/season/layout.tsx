@@ -7,15 +7,6 @@ type Props = {
 	params: Promise<{ season: string }>;
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-	const { season } = await params;
-
-	return {
-		title: `Season ${season} Formula 1 results`,
-		description: "",
-	};
-}
-
 export default async function RootLayout({
 	params,
 	children,

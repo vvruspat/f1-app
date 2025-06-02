@@ -1,0 +1,70 @@
+name: E2E Tests
+
+on:
+  push:
+    branches:
+      - staging
+
+jobs:
+  e2e-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Playwright browsers
+        working-directory: ./apps/frontend
+        run: npx playwright install --with-deps
+
+      - name: Create backend .env file
+        run: |
+          echo "MONGODB_URI=${{ vars.BACKEND_MONGODB_URI }}" > ./apps/backend/.env
+          echo "ERGAST_API_BASE=${{ vars.BACKEND_ERGAST_API_BASE }}" >> ./apps/backend/.env
+          echo "REDIS_URI=${{ vars.BACKEND_REDIS_URI }}" >> ./apps/backend/.env
+          echo "SENTRY_AUTH_TOKEN=${{ secrets.BACKEND_SENTRY_AUTH_TOKEN }}" >> ./apps/backend/.env
+        env:
+          BACKEND_SENTRY_AUTH_TOKEN: ${{ secrets.BACKEND_SENTRY_AUTH_TOKEN }}
+
+      - name: Create frontend .env file
+        run: |
+          echo "NEXT_API_URL=${{ vars.FRONTEND_NEXT_API_URL }}" > ./apps/frontend/.env
+          echo "SENTRY_AUTH_TOKEN=${{ secrets.FRONTEND_SENTRY_AUTH_TOKEN }}" >> ./apps/frontend/.env
+        env:
+          FRONTEND_SENTRY_AUTH_TOKEN: ${{ secrets.FRONTEND_SENTRY_AUTH_TOKEN }}
+
+      - name: Build Docker images
+        run: npm run docker:build
+
+      - name: Run Docker containers in detached mode
+        run: docker-compose -f docker-compose.dev.yml up -d
+
+      - name: Wait for services to be ready
+        run: |
+          echo "Waiting for services to start..."
+          sleep 45
+
+      - name: Run E2E tests
+        run: npm run test:e2e
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: apps/frontend/playwright-report/
+          retention-days: 7
+
+      - name: Stop Docker containers
+        if: always()
+        run: docker-compose -f docker-compose.dev.yml down
