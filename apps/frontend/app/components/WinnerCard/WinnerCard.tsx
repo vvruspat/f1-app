@@ -13,7 +13,7 @@ import {
 	MIconCaretDown,
 	MText,
 } from "@repo/uikit";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { formatDate } from "../../utils/formatDate";
 import styles from "./WinnerCard.module.css";
 import clsx from "clsx";
@@ -22,12 +22,15 @@ type RaceWinnerCardProps = RaceWinner;
 
 export const WinnerCard = (raceWinner: RaceWinnerCardProps) => {
 	const [collapsed, setCollapsed] = useState(true);
+	const id = useId();
 
 	return (
 		<MCard
+			id={`winner-${id}`}
+			as="section"
+			aria-labelledby={`driver-${id}`}
 			showHeaderDivider
 			collapsed={collapsed}
-			aria-expanded={!collapsed}
 			borderLeftTopRadius="4xl"
 			borderLeftBottomRadius="4xl"
 			borderRightBottomRadius="4xl"
@@ -38,9 +41,14 @@ export const WinnerCard = (raceWinner: RaceWinnerCardProps) => {
 					<MCaption>
 						Round {raceWinner.round} | {formatDate(raceWinner.date)}
 					</MCaption>
-					<MHeading mode="h2">{raceWinner.driver}</MHeading>
+					<MHeading mode="h2" id={`driver-${id}`}>
+						{raceWinner.driver}
+					</MHeading>
 					<MButton
 						mode="transparent"
+						aria-expanded={!collapsed}
+						aria-controls={`winner-${id}`}
+						id={`toggle-${id}`}
 						after={
 							<MIconCaretDown
 								mode="regular"
