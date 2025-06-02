@@ -17,3 +17,6 @@
 - React Testing Library
 - 90%+ unit test coverage for components
 - Storybook for visual regression and documentation
+
+## Lighthouse score
+![Lighthouse Score](../images/lighthouse-score.png)
