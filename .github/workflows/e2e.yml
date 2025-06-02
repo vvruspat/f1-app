@@ -29,19 +29,19 @@ jobs:
 
       - name: Create backend .env file
         run: |
-          echo "MONGODB_URI=${{ vars.BACKEND_MONGODB_URI }}" > ./apps/backend/.env
-          echo "ERGAST_API_BASE=${{ vars.BACKEND_ERGAST_API_BASE }}" >> ./apps/backend/.env
-          echo "REDIS_URI=${{ vars.BACKEND_REDIS_URI }}" >> ./apps/backend/.env
-          echo "SENTRY_AUTH_TOKEN=${{ secrets.BACKEND_SENTRY_AUTH_TOKEN }}" >> ./apps/backend/.env
+          echo "MONGODB_URI=${{ vars.MONGODB_URI }}" > ./apps/backend/.env
+          echo "ERGAST_API_BASE=${{ vars.ERGAST_API_BASE }}" >> ./apps/backend/.env
+          echo "REDIS_URI=${{ vars.REDIS_URI }}" >> ./apps/backend/.env
+          echo "SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}" >> ./apps/backend/.env
         env:
-          BACKEND_SENTRY_AUTH_TOKEN: ${{ secrets.BACKEND_SENTRY_AUTH_TOKEN }}
+          BACKEND_SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
       - name: Create frontend .env file
         run: |
-          echo "NEXT_API_URL=${{ vars.FRONTEND_NEXT_API_URL }}" > ./apps/frontend/.env
-          echo "SENTRY_AUTH_TOKEN=${{ secrets.FRONTEND_SENTRY_AUTH_TOKEN }}" >> ./apps/frontend/.env
+          echo "NEXT_API_URL=${{ vars.NEXT_API_URL }}" > ./apps/frontend/.env
+          echo "SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}" >> ./apps/frontend/.env
         env:
-          FRONTEND_SENTRY_AUTH_TOKEN: ${{ secrets.FRONTEND_SENTRY_AUTH_TOKEN }}
+          FRONTEND_SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
       - name: Build Docker images
         run: npm run docker:build
