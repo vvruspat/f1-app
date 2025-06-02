@@ -64,8 +64,11 @@ jobs:
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
+      - name: Build backend & frontend server
+        run: npm run build
+
       - name: Start backend & frontend server
-        run: npm run dev:e2e &
+        run: npm run start &
 
       - name: Wait for backend to be ready
         run: |
