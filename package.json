@@ -4,6 +4,7 @@
 	"scripts": {
 		"build": "turbo run build",
 		"dev": "turbo run dev",
+		"dev:e2e": "turbo run dev --filter=backend --filter=frontend",
 		"lint": "turbo run lint",
 		"format": "turbo run format",
 		"test": "turbo run test",
