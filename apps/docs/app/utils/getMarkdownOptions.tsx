@@ -1,4 +1,4 @@
-import { MBadge, MFlex, MHeading, MLinkButton } from "@repo/uikit";
+import { MBadge, MDivider, MFlex, MHeading, MLinkButton } from "@repo/uikit";
 import Link from "next/link";
 import type { Options } from "react-markdown";
 import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -56,7 +56,7 @@ export const getMarkdownOptions = (): Readonly<Options> => {
 					align="stretch"
 					justify="start"
 					gap="s"
-					style={{ padding: "0 var(--whiteSpace-general-2x)" }}
+					style={{ padding: "0 var(--whiteSpace-general-2x)", flex: "1 100%" }}
 				>
 					{props.children}
 				</MFlex>
@@ -110,6 +110,7 @@ export const getMarkdownOptions = (): Readonly<Options> => {
 					</a>
 				);
 			},
+			hr: () => <MDivider />,
 		},
 		urlTransform: (url) => {
 			return url.replace(".md", "");

@@ -4,6 +4,7 @@
 - React Testing Library
 - Snapshot and behavior testing
 - Coverage: 90%+
+- e2e - playwright
 
 ![Coverage UIKit](../images/coverage-uikit.png)
 
@@ -11,6 +12,7 @@
 - Jest
 - Unit and integration tests
 - Coverage: 80%+
+- e2e - jest
 
 ![Coverage UIKit](../images/coverage-backend.png)
 
