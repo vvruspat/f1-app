@@ -10,6 +10,27 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
+    services:
+      mongo:
+        image: mongo:6
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd="mongosh --eval 'db.adminCommand(\"ping\")'" 
+          --health-interval=10s 
+          --health-timeout=5s 
+          --health-retries=5
+
+      redis:
+        image: redis:7
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd="redis-cli ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -34,40 +55,33 @@ jobs:
           echo "REDIS_URI=${{ vars.REDIS_URI }}" >> ./apps/backend/.env
           echo "SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}" >> ./apps/backend/.env
         env:
-          BACKEND_SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
       - name: Create frontend .env file
         run: |
           echo "NEXT_API_URL=${{ vars.NEXT_API_URL }}" > ./apps/frontend/.env
           echo "SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}" >> ./apps/frontend/.env
         env:
-          FRONTEND_SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
-      - name: Build Docker images
-        run: npm run docker:build
+      - name: Start backend & frontend server
+        run: npm run dev
 
-      - name: Run Docker containers in detached mode
-        run: docker compose -f docker-compose.dev.yml up -d
-
-      - name: Wait for services to be ready
+      - name: Wait for backend to be ready
         run: |
-            for i in {1..30}; do
-            if curl -sSf http://localhost:3000 > /dev/null && curl -sSf http://localhost:3002 > /dev/null; then
-                echo "Frontend and backend are up!"
-                exit 0
-            fi
-            echo "Waiting for frontend/backend..."
+          echo "Waiting for backend to be ready..."
+          until curl -s http://localhost:3002/; do
             sleep 5
-            done
-            echo "Services did not start in time"
-            docker compose -f docker-compose.dev.yml logs
-            exit 1
+          done
+          echo "Backend is ready!"
 
-      - name: Display Docker logs for debugging
-        if: always() # Run this even if subsequent steps might fail
+      - name: Wait for frontend to be ready
         run: |
-          echo "---- Service Logs (assuming service name 'dev') ----"
-          docker compose -f docker-compose.dev.yml logs dev || echo "Failed to get backend logs (service might be named differently or not started)."
+          echo "Waiting for frontend to be ready..."
+          until curl -s http://localhost:3000/; do
+            sleep 5
+          done
+          echo "Frontend is ready!"
 
       - name: Run E2E tests
         run: npm run test:e2e
@@ -79,7 +93,3 @@ jobs:
           name: playwright-report
           path: apps/frontend/playwright-report/
           retention-days: 7
-
-      - name: Stop Docker containers
-        if: always()
-        run: docker compose -f docker-compose.dev.yml down

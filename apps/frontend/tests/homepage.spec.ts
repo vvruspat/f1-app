@@ -34,15 +34,15 @@ test.describe("Homepage", () => {
 		await page.goto("http://localhost:3000/");
 		await page.waitForURL("**/season/2024");
 
-		const roundCards = page.locator('[aria-expanded="false"]');
+		const roundCards = await page.locator('[aria-expanded="false"]');
 		const roundCardCount = await roundCards.count();
 
-		expect(roundCardCount).toBeGreaterThan(0);
+		await expect(roundCardCount).toBeGreaterThan(0);
 
 		const roundCardsCaption = await roundCards
 			.first()
 			.getByText(/Round\s1\s\|.*/);
-		expect(roundCardsCaption).toBeVisible();
+		await expect(roundCardsCaption).toBeVisible();
 	});
 
 	test("click on the button with aria label 'Get more info about round winner' in round card should reveal info about speed", async ({
@@ -51,9 +51,9 @@ test.describe("Homepage", () => {
 		await page.goto("http://localhost:3000/");
 		await page.waitForURL("**/season/2024");
 
-		const roundCard = page.locator('[aria-expanded="false"]').first();
+		const roundCard = await page.locator('[aria-expanded="false"]').first();
 
-		const infoButton = roundCard.getByRole("button", {
+		const infoButton = await roundCard.getByRole("button", {
 			name: "Get more info about round winner",
 		});
 

@@ -12,6 +12,9 @@ services:
       - "6379:6379"
 
   dev:
+    depends_on:
+      - mongo
+      - redis
     build:
       context: .
       dockerfile: Dockerfile.dev
