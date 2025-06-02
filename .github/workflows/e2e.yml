@@ -51,16 +51,23 @@ jobs:
 
       - name: Wait for services to be ready
         run: |
-          echo "Waiting for services to start..."
-          sleep 45
+            for i in {1..30}; do
+            if curl -sSf http://localhost:3000 > /dev/null && curl -sSf http://localhost:3002 > /dev/null; then
+                echo "Frontend and backend are up!"
+                exit 0
+            fi
+            echo "Waiting for frontend/backend..."
+            sleep 5
+            done
+            echo "Services did not start in time"
+            docker compose -f docker-compose.dev.yml logs
+            exit 1
 
       - name: Display Docker logs for debugging
         if: always() # Run this even if subsequent steps might fail
         run: |
-          echo "---- Backend Service Logs (assuming service name 'dev') ----"
+          echo "---- Service Logs (assuming service name 'dev') ----"
           docker compose -f docker-compose.dev.yml logs dev || echo "Failed to get backend logs (service might be named differently or not started)."
-          echo "---- Frontend Service Logs (assuming service name 'frontend') ----"
-          docker compose -f docker-compose.dev.yml logs frontend || echo "Failed to get frontend logs (service might be named differently or not started)."
 
       - name: Run E2E tests
         run: npm run test:e2e
