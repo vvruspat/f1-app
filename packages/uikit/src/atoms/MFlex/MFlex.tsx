@@ -3,6 +3,7 @@ import clsx from "clsx";
 import styles from "./MFlex.module.css";
 
 export type MFlexProps = ComponentProps<"div"> & {
+	as?: "div" | "section" | "article" | "nav" | "aside";
 	gap?: "xs" | "s" | "m" | "l" | "xl" | "2xl" | "3xl" | "4xl" | "none";
 	direction?: "row" | "column" | "row-reverse" | "column-reverse";
 	align?: "normal" | "start" | "center" | "end" | "stretch";
@@ -18,6 +19,7 @@ export type MFlexProps = ComponentProps<"div"> & {
 };
 
 export const MFlex = ({
+	as = "div",
 	children,
 	className,
 	style = {},
@@ -28,20 +30,20 @@ export const MFlex = ({
 	wrap = "wrap",
 	...restProps
 }: MFlexProps) => {
-	return (
-		<div
-			className={clsx(styles.flex, styles[`flex-gap-${gap}`], className)}
-			style={{
+	return React.createElement(
+		as,
+		{
+			className: clsx(styles.flex, styles[`flex-gap-${gap}`], className),
+			style: {
 				flexDirection: direction,
 				alignItems: align,
 				justifyContent: justify,
 				flexWrap: wrap,
 				...style,
-			}}
-			{...restProps}
-		>
-			{children}
-		</div>
+			},
+			...restProps,
+		},
+		children,
 	);
 };
 

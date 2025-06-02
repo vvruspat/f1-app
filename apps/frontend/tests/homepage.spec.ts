@@ -34,7 +34,9 @@ test.describe("Homepage", () => {
 		await page.goto("http://localhost:3000/");
 		await page.waitForURL("**/season/2024");
 
-		const roundCards = await page.locator('[aria-expanded="false"]');
+		const roundCards = await page.getByRole("region", {
+			name: "Max Verstappen",
+		});
 		const roundCardCount = await roundCards.count();
 
 		await expect(roundCardCount).toBeGreaterThan(0);
@@ -51,7 +53,11 @@ test.describe("Homepage", () => {
 		await page.goto("http://localhost:3000/");
 		await page.waitForURL("**/season/2024");
 
-		const roundCard = await page.locator('[aria-expanded="false"]').first();
+		const roundCard = await page
+			.getByRole("region", {
+				name: "Max Verstappen",
+			})
+			.first();
 
 		const infoButton = await roundCard.getByRole("button", {
 			name: "Get more info about round winner",

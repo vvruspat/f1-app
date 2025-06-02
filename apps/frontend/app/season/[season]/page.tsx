@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 	return {
 		title: `Season ${season} Formula 1 results`,
-		description: "",
+		description: `Formula 1 results for the ${season} season`,
 	};
 }
 
