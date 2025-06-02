@@ -5,6 +5,8 @@ import type { App } from "supertest/types";
 import { AppModule } from "./../src/app.module";
 import { getConnectionToken } from "@nestjs/mongoose";
 
+const E2E_TEST_TIMEOUT = 30000;
+
 describe("AppController (e2e)", () => {
 	let app: INestApplication<App>;
 
@@ -15,18 +17,22 @@ describe("AppController (e2e)", () => {
 
 		app = moduleFixture.createNestApplication();
 		await app.init();
-	});
+	}, E2E_TEST_TIMEOUT);
 
 	afterAll(async () => {
 		try {
 			const connection = app.get(getConnectionToken());
-			await connection.close();
+			if (connection && connection.readyState === 1) {
+				await connection.close(true);
+			}
 		} catch (e) {
-			// ignore if not using mongoose or already closed
-			console.error("Error closing connection", e);
+			console.error("Error getting or closing Mongoose connection", e);
 		}
-		await app.close();
-	});
+
+		if (app) {
+			await app.close();
+		}
+	}, E2E_TEST_TIMEOUT);
 
 	it("/ (GET)", () => {
 		return request(app.getHttpServer()).get("/").expect(200).expect("OK");

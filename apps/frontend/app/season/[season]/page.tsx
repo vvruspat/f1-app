@@ -1,6 +1,20 @@
 import { redirect } from "next/navigation";
 import { Winners } from "../../components/Winners";
 import { getSeasonWinnersAction } from "../../actions/getSeasonWinnersAction";
+import type { Metadata } from "next";
+
+type Props = {
+	params: Promise<{ season: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+	const { season } = await params;
+
+	return {
+		title: `Season ${season} Formula 1 results`,
+		description: "",
+	};
+}
 
 export default async function SeasonResultPage({
 	params,

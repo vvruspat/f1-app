@@ -9,7 +9,8 @@
 		"start": "next start",
 		"lint": "biome lint --write .",
 		"format": "biome format --write .",
-		"check-types": "tsc --noEmit"
+		"check-types": "tsc --noEmit",
+		"test:e2e": "playwright test"
 	},
 	"dependencies": {
 		"@repo/uikit": "*",
@@ -20,6 +21,7 @@
 		"react-dom": "^19.1.0"
 	},
 	"devDependencies": {
+		"@playwright/test": "^1.52.0",
 		"@repo/typescript-config": "*",
 		"@types/node": "^22.15.3",
 		"@types/react": "19.1.0",

@@ -42,12 +42,14 @@ The F1 App is deployed on AWS using a robust and scalable architecture. Below is
   - Processes API requests and interacts with databases.
   - Includes a validator for request validation.
 
+- **MemoryDB (Redis) cluster:**
+- **DocumentDB (MongoDB) cluster:**
 ---
 
 ## Databases
 
 ### **MemoryDB (Redis)**
-- **Purpose:** Caching layer for aggregated data to improve performance.
+- **Purpose:** Caching layer for aggregated and calculated data to improve performance.
 - **Security:** Protected by a dedicated security group.
 
 ### **DocumentDB (MongoDB)**
@@ -57,8 +59,7 @@ The F1 App is deployed on AWS using a robust and scalable architecture. Below is
 ---
 
 ## Gateway
-- Acts as a proxy to external APIs, such as the **Ergast API**.
-- Fetches F1 data and provides it to the backend for processing.
+- Providing outbound access for backend service from private subnet.
 
 ---
 
@@ -71,17 +72,6 @@ The F1 App is deployed on AWS using a robust and scalable architecture. Below is
 ### **Sentry**
 - **Frontend Sentry:** Monitors and logs errors in the frontend application.
 - **Backend Sentry:** Monitors and logs errors in the backend application.
-
----
-
-## Docker Compose
-- **Services:** Frontend, backend, Redis, MongoDB.
-- **Preconfigured `.env` files:** Simplifies local development and testing.
-
----
-
-## Health Checks
-- **Backend and DB:** Use Docker health checks to ensure services are running properly.
 
 ---
 
