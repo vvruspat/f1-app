@@ -13,8 +13,8 @@
 		"check-types": "turbo run check-types",
 		"csstypes": "turbo run csstypes",
 		"docker:startup": "npm install && npm run dev",
-		"docker:build": "docker-compose -f docker-compose.dev.yml build",
-		"docker:dev": "docker-compose -f docker-compose.dev.yml up",
+		"docker:build": "docker compose -f docker-compose.dev.yml build",
+		"docker:dev": "docker compose -f docker-compose.dev.yml up",
 		"prepare": "husky"
 	},
 	"devDependencies": {
