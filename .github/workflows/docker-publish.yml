@@ -14,11 +14,9 @@ env:
   ECR_BASE_REPO: f1app/base-builder
   ECR_FRONTEND_REPO: f1app/frontend
   ECR_BACKEND_REPO: f1app/backend
-  ECR_DOCS_REPO: f1app/docs
   ECS_FRONTEND_CLUSTER: f1app-frontend
   ECS_BACKEND_CLUSTER: f1app-backend
   ECS_FRONTEND_SERVICE: f1-app-frontend-task-service
-  ECS_DOCS_SERVICE: f1-app-app-docs-task-service
   ECS_BACKEND_SERVICE: f1-app-backend-task-service
 
 jobs:
@@ -64,16 +62,6 @@ jobs:
           docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_FRONTEND_REPO:latest
 
       # ----------------------
-      # Build and Push Documentation
-      # ----------------------
-      - name: Build and push docs image
-        run: |
-          docker build -f Dockerfile.docs \
-            -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_DOCS_REPO:latest .
-
-          docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_DOCS_REPO:latest
-
-      # ----------------------
       # Build and Push Backend
       # ----------------------
       - name: Build and push backend image
@@ -91,16 +79,6 @@ jobs:
           aws ecs update-service \
             --cluster $ECS_FRONTEND_CLUSTER \
             --service $ECS_FRONTEND_SERVICE \
-            --force-new-deployment
-
-      # ----------------------
-      # Deploy to ECS - Docs
-      # ----------------------
-      - name: Force new deployment of docs service
-        run: |
-          aws ecs update-service \
-            --cluster $ECS_FRONTEND_CLUSTER \
-            --service $ECS_DOCS_SERVICE \
             --force-new-deployment
 
       # ----------------------
