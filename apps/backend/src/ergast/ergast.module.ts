@@ -16,5 +16,6 @@ import { SeasonModel, SeasonSchema } from "../db/schemas/season.schema";
 	],
 	controllers: [],
 	providers: [ErgastService],
+	exports: [ErgastService],
 })
 export class ErgastModule {}

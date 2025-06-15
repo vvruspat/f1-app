@@ -9,6 +9,7 @@ import type {
 	SeasonsErgastResponse,
 } from "@repo/types";
 import { $fetch } from "../utils/fetch";
+import { delay } from "../utils/delay";
 import { ConfigService } from "@nestjs/config";
 
 @Injectable()
@@ -41,45 +42,74 @@ export class ErgastService implements OnApplicationBootstrap {
 	}
 
 	async syncSeasons() {
-		// 2024 is hardcoded because ergast API will not be updated anymore after 2024
-		const seasonsInDb = await this.seasonModel
-			.findOne({ season: "2024" })
-			.lean();
+		const response = await this.fetchSeasons();
+		const seasons = response.MRData.SeasonTable.Seasons;
+		const currentYear = new Date().getFullYear();
 
-		if (!seasonsInDb) {
-			const response = await this.fetchSeasons();
-			const seasons = response.MRData.SeasonTable.Seasons;
+		// Get all existing seasons from DB
+		const existingSeasons = await this.seasonModel.find({}).lean();
+		const existingSeasonYears = new Set(existingSeasons.map((s) => s.season));
 
-			await this.seasonModel.deleteMany({});
-			await this.seasonModel.insertMany(seasons);
+		// Filter only seasons not in DB
+		const newSeasons = seasons.filter(
+			(s) =>
+				!existingSeasonYears.has(s.season) || Number(s.season) === currentYear,
+		);
 
-			await this.syncSeasonsResults(seasons);
+		if (newSeasons.length > 0) {
+			await this.seasonModel.bulkWrite(
+				newSeasons.map((season) => ({
+					updateOne: {
+						filter: { season: season.season },
+						update: { $set: season },
+						upsert: true,
+					},
+				})),
+			);
+			await this.syncSeasonsResults(newSeasons);
 		}
 	}
 
 	async syncSeasonsResults(seasons: Season[]) {
-		await this.resultsModel.deleteMany({
-			season: { $in: seasons.map((s) => s.season) },
-		});
+		const existingResults = await this.resultsModel
+			.find({
+				season: { $in: seasons.map((s) => s.season) },
+			})
+			.lean();
+
+		const existingResultsSeasons = new Set(
+			existingResults.map((r) => r.season),
+		);
 
 		const bulkOps: AnyBulkWriteOperation<SeasonResultsModel>[] = [];
+		const currentYear = new Date().getFullYear().toString();
 
 		for (const season of seasons) {
+			// Always update current year, skip others if already exist
+			if (
+				season.season !== currentYear &&
+				existingResultsSeasons.has(season.season)
+			) {
+				continue;
+			}
+
 			const resultsResponse = await this.fetchSeasonResults(
 				season.season,
 				1000,
 			);
 			bulkOps.push({
-				insertOne: {
-					document: {
+				replaceOne: {
+					filter: { season: season.season },
+					replacement: {
 						season: season.season,
 						Races: resultsResponse.MRData.RaceTable.Races,
 					},
+					upsert: true,
 				},
 			});
+			await delay(300); // Respect rate limit
 		}
 
-		// Perform bulk write operation for all missing seasons
 		if (bulkOps.length > 0) {
 			await this.resultsModel.bulkWrite(bulkOps);
 		}
