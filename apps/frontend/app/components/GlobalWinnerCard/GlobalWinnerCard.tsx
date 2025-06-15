@@ -20,6 +20,8 @@ export const GlobalWinnerCard = ({
 	season,
 	...globalWinner
 }: GlobalWinnerCardProps) => {
+	const isCurrentSeason = new Date().getFullYear() === Number(season);
+
 	return (
 		<MCard
 			borderLeftTopRadius="4xl"
@@ -36,7 +38,7 @@ export const GlobalWinnerCard = ({
 					<MFlex direction="column" align="start" justify="start">
 						<MHeading mode="h1" className={styles.winnerBlockTitle}>
 							<MCaption className={styles.captionWinner}>
-								WINNER {season}
+								{isCurrentSeason ? "LEADER" : "WINNER"}&nbsp;{season}
 							</MCaption>
 						</MHeading>
 						<MHeading mode="h2" className={styles.headerWinner}>
