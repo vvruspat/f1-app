@@ -1,0 +1,24 @@
+0 verbose cli /opt/homebrew/Cellar/node/23.3.0/bin/node /opt/homebrew/bin/npm
+1 info using npm@10.9.1
+2 info using node@v23.3.0
+3 silly config load:file:/opt/homebrew/lib/node_modules/npm/npmrc
+4 silly config load:file:/Users/aleksandrkolesov/Develop/f1-app/.npmrc
+5 silly config load:file:/Users/aleksandrkolesov/.npmrc
+6 silly config load:file:/opt/homebrew/etc/npmrc
+7 verbose title npm run test
+8 verbose argv "run" "test" "--cache" "w"
+9 verbose logfile logs-max:10 dir:/Users/aleksandrkolesov/Develop/f1-app/w/_logs/2025-06-15T18_59_29_958Z-
+10 verbose logfile /Users/aleksandrkolesov/Develop/f1-app/w/_logs/2025-06-15T18_59_29_958Z-debug-0.log
+11 silly logfile done cleaning log files
+12 http fetch GET 200 https://registry.npmjs.org/npm 172ms
+13 verbose cwd /Users/aleksandrkolesov/Develop/f1-app
+14 verbose os Darwin 24.5.0
+15 verbose node v23.3.0
+16 verbose npm  v10.9.1
+17 notice
+17 notice New [31mmajor[39m version of npm available! [31m10.9.1[39m -> [34m11.4.2[39m
+17 notice Changelog: [34mhttps://github.com/npm/cli/releases/tag/v11.4.2[39m
+17 notice To update run: [4mnpm install -g npm@11.4.2[24m
+17 notice  { force: true, [Symbol(proc-log.meta)]: true }
+18 verbose exit 0
+19 info ok

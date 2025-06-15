@@ -65,11 +65,13 @@ describe("ErgastService", () => {
 		deleteMany: jest.Mock;
 		insertMany: jest.Mock;
 		findOne: jest.Mock;
+		bulkWrite: jest.Mock;
 	};
 	let resultsModel: {
+		find: jest.Mock;
+		lean: jest.Mock;
 		findOne: jest.Mock;
 		deleteMany: jest.Mock;
-		lean: jest.Mock;
 		bulkWrite: jest.Mock;
 	};
 	let configService: { get: jest.Mock };
@@ -81,15 +83,17 @@ describe("ErgastService", () => {
 			deleteMany: jest.fn(),
 			insertMany: jest.fn(),
 			findOne: jest.fn().mockReturnThis(),
+			bulkWrite: jest.fn(),
 		};
 		resultsModel = {
-			findOne: jest.fn().mockReturnThis(),
+			find: jest.fn().mockReturnThis(),
 			lean: jest.fn(),
+			findOne: jest.fn().mockReturnThis(),
 			deleteMany: jest.fn(),
 			bulkWrite: jest.fn(),
 		};
 		configService = {
-			get: jest.fn().mockReturnValue("http://ergast.test/api/f1"),
+			get: jest.fn().mockReturnValue("https://api.jolpi.ca/ergast/f1"),
 		};
 
 		const module: TestingModule = await Test.createTestingModule({
@@ -115,11 +119,12 @@ describe("ErgastService", () => {
 	describe("syncSeasons", () => {
 		it("fetches and saves seasons if db is empty", async () => {
 			const currentYear = new Date().getFullYear().toString();
-
-			seasonModel.findOne.mockReturnThis();
-			seasonModel.lean.mockResolvedValue(null);
-
 			const apiSeasons = [{ season: currentYear, url: "url" }];
+
+			seasonModel.find.mockReturnThis();
+			seasonModel.lean.mockResolvedValue(apiSeasons);
+			resultsModel.find.mockReturnThis();
+			resultsModel.lean.mockResolvedValue([]);
 
 			jest.spyOn(service, "fetchSeasons").mockResolvedValue({
 				MRData: {
@@ -151,13 +156,23 @@ describe("ErgastService", () => {
 						},
 					}),
 				);
-			seasonModel.deleteMany.mockResolvedValue({});
-			seasonModel.insertMany.mockResolvedValue(apiSeasons);
+			seasonModel.bulkWrite.mockResolvedValue(apiSeasons);
 
 			await service.syncSeasons();
 
-			expect(seasonModel.deleteMany).toHaveBeenCalled();
-			expect(seasonModel.insertMany).toHaveBeenCalledWith(apiSeasons);
+			expect(seasonModel.bulkWrite).toHaveBeenCalledWith([
+				...apiSeasons.map((season) => ({
+					updateOne: {
+						filter: {
+							season: "2025",
+						},
+						update: {
+							$set: season,
+						},
+						upsert: true,
+					},
+				})),
+			]);
 		});
 	});
 
@@ -170,6 +185,8 @@ describe("ErgastService", () => {
 			];
 			seasonModel.find.mockReturnThis();
 			seasonModel.lean.mockResolvedValue(seasons);
+			resultsModel.find.mockReturnThis();
+			resultsModel.lean.mockResolvedValue([]);
 
 			// Simulate: no results for 2000, but results for current year exist
 			resultsModel.findOne.mockImplementation(
