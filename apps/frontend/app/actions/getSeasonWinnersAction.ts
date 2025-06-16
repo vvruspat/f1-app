@@ -11,12 +11,18 @@ export async function getSeasonWinnersAction(
 		const res = await fetch(`${backendUrl}/seasons/${season}`);
 
 		if (!res.ok) {
+			console.error(
+				`Failed to fetch season ${season} winners:`,
+				res.statusText,
+				res.status,
+			);
 			return {
 				error: `Failed to fetch season ${season} winners`,
 			};
 		}
 		return await res.json();
 	} catch (error) {
+		console.error("Error fetching season winners:", error);
 		return { error: "Server error" };
 	}
 }
