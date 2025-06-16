@@ -26,8 +26,6 @@ export default async function SeasonResultPage({
 
 		const results = await getSeasonWinnersAction(season);
 
-		console.log("Season results:", results);
-
 		if (results.error || !results.data) redirect("/error");
 
 		return <Winners {...results.data} />;

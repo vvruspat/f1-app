@@ -50,10 +50,22 @@ export class ErgastService implements OnApplicationBootstrap {
 		const existingSeasons = await this.seasonModel.find({}).lean();
 		const existingSeasonYears = new Set(existingSeasons.map((s) => s.season));
 
+		const existingSeasonsResults = await this.resultsModel
+			.find({
+				season: { $in: seasons.map((s) => s.season) },
+			})
+			.lean();
+
+		const existingResultsSeasons = new Set(
+			existingSeasonsResults.map((r) => r.season),
+		);
+
 		// Filter only seasons not in DB
 		const newSeasons = seasons.filter(
 			(s) =>
-				!existingSeasonYears.has(s.season) || Number(s.season) === currentYear,
+				!existingSeasonYears.has(s.season) ||
+				!existingResultsSeasons.has(s.season) ||
+				Number(s.season) === currentYear,
 		);
 
 		if (newSeasons.length > 0) {
@@ -86,6 +98,7 @@ export class ErgastService implements OnApplicationBootstrap {
 
 		for (const season of seasons) {
 			// Always update current year, skip others if already exist
+
 			if (
 				season.season !== currentYear &&
 				existingResultsSeasons.has(season.season)
@@ -107,7 +120,7 @@ export class ErgastService implements OnApplicationBootstrap {
 					upsert: true,
 				},
 			});
-			await delay(300); // Respect rate limit
+			await delay(500); // Respect rate limit
 		}
 
 		if (bulkOps.length > 0) {
