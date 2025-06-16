@@ -15,6 +15,7 @@ import { ConfigService } from "@nestjs/config";
 @Injectable()
 export class ErgastService implements OnApplicationBootstrap {
 	private apiBase: string;
+	private startSeason: string;
 
 	constructor(
 		@InjectModel(SeasonModel.name) private seasonModel: Model<SeasonModel>,
@@ -23,6 +24,8 @@ export class ErgastService implements OnApplicationBootstrap {
 		private readonly configService: ConfigService,
 	) {
 		this.apiBase = this.configService.get<string>("ERGAST_API_BASE") ?? "";
+		this.startSeason =
+			this.configService.get<string>("ERGAST_START_SEASON") ?? "2005";
 	}
 
 	async onApplicationBootstrap() {
@@ -65,7 +68,9 @@ export class ErgastService implements OnApplicationBootstrap {
 			(s) =>
 				!existingSeasonYears.has(s.season) ||
 				!existingResultsSeasons.has(s.season) ||
-				Number(s.season) === currentYear,
+				Number(s.season) === currentYear ||
+				// Only sync seasons after 2005
+				Number(s.season) > Number(this.startSeason),
 		);
 
 		if (newSeasons.length > 0) {
@@ -120,7 +125,7 @@ export class ErgastService implements OnApplicationBootstrap {
 					upsert: true,
 				},
 			});
-			await delay(500); // Respect rate limit
+			await delay(1000); // Respect rate limit
 		}
 
 		if (bulkOps.length > 0) {
